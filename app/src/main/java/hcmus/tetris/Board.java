@@ -9,14 +9,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Board {
+    static PieceType[] pieceTypes = PieceType.values();
+    static Random rng = new Random();
+
     int rows, columns;
-    Random rng = new Random();
-    Timer timer = new Timer();
-
     int[][] pile;
-    Queue<Piece> queue = new LinkedList<>();
 
-    PieceType[] pieceTypes = PieceType.values();
+    Timer timer = new Timer();
+    public Runnable tickListener = null;
+
+    Queue<Piece> queue = new LinkedList<>();
 
     public Board(int rows, int columns) {
         if (columns < 4)
@@ -35,12 +37,12 @@ public class Board {
             public void run() {
                 tick();
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
 
     void generateNewPiece() {
         PieceType type = pieceTypes[rng.nextInt(pieceTypes.length)];
-        queue.add(new Piece(type));
+        queue.add(new Piece(type, rng.nextInt(columns / 2)));
     }
 
     void tick() {
@@ -49,11 +51,20 @@ public class Board {
             generateNewPiece();
             return;
         }
-        if (piece.getCoord().x + piece.getHeight() >= rows) {
-            generateNewPiece();
-            return;
-        }
+
+        Coord[] colliders = piece.getDownColliders();
+        for (Coord coll : colliders)
+            if (coll.x >= rows || pile[coll.x][coll.y] != 0) {
+                for (Coord coord : piece.getBlockPositions())
+                    pile[coord.x][coord.y] = piece.color;
+                generateNewPiece();
+                queue.poll();
+                return;
+            }
         piece.drop();
+
+        if (tickListener != null)
+            tickListener.run();
     }
 
     public Piece getCurrentPiece() {

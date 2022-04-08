@@ -26,7 +26,7 @@ public class Piece {
         width = type.width;
         height = type.height;
         color = type.color;
-        coord = new Coord(0, Math.max(columns / 2 - width, 0));
+        coord = new Coord(0, columns);
         updateBlocks();
     }
 
