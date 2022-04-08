@@ -107,5 +107,12 @@ public class BoardView extends View {
 
         // Draw the pile
         int[][] pile = board.getPile();
+        for (int i = 0; i < pile.length; ++i)
+            for (int j = 0; j < pile[i].length; ++j)
+                if (pile[i][j] != 0) {
+                    boardPaint.setColor(ContextCompat.getColor(getContext(), pile[i][j]));
+                    drawUnit(canvas, i, j, 0, boardPaint);
+                    drawUnit(canvas, i, j, -1, borderPaint);
+                }
     }
 }
