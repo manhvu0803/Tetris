@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="15dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--    Guideline helpers-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mid_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/mid_vertical_guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66"/>
+
+    <!--    Items-->
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="01/01/2022 00:00:00"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Someone"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline2"
+        app:layout_constraintStart_toStartOf="@+id/mid_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@+id/txtTime" />
+
+    <TextView
+        android:id="@+id/txtHighScore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="1000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtName"
+        app:layout_constraintTop_toTopOf="@+id/txtName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Tetris</string>
+    <string name="play_game">Chơi</string>
+    <string name="new_game">Chơi mới</string>
+    <string name="load_game">Chơi tiếp</string>
+    <string name="settings">Cài đặt</string>
+    <string name="view_high_scores">Xem điểm cao</string>
+    <string name="exit">Thoát</string>
+    <string name="back">Trở về</string>
+    <string name="time">Thời gian</string>
+    <string name="name">Tên</string>
+    <string name="score">Điểm</string>
 </resources>

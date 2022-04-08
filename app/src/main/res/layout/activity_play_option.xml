@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".PlayOptionActivity">
     <!--    Guideline helpers-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_vertical_guideline"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="@string/app_name"
+        android:text="@string/play_game"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,11 +34,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnPlay"
+        android:id="@+id/btnPlayNew"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/play_game"
+        android:text="@string/new_game"
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
@@ -46,39 +46,27 @@
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSetting"
+        android:id="@+id/btnLoadGame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/settings"
+        android:text="@string/load_game"
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPlayNew"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnViewScore"
+        android:id="@+id/btnBackToMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="@string/view_high_scores"
+        android:text="@string/back"
         android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/btnSetting"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnExitApp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/exit"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
-        app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/btnViewScore"/>
+        app:layout_constraintTop_toBottomOf="@+id/btnLoadGame"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
