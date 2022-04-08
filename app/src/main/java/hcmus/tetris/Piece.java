@@ -1,24 +1,22 @@
 package hcmus.tetris;
 
 public class Piece {
-    int rotation;
-    int width, height;
-    int[] data;
-    Coord coord;
+    public final int color;
+    private int rotation;
+    private int width, height;
+    private Coord coord;
+    private PieceType type;
 
     public Piece(PieceType type) {
-        rotation = 0;
-        data = type.getData();
-        width = type.getWidth();
-        height = type.getHeight();
-        coord = new Coord(0, 0);
+        this(type, 0);
     }
 
     public Piece(PieceType type, int columns) {
         rotation = 0;
-        data = type.getData();
-        width = type.getWidth();
-        height = type.getHeight();
+        this.type = type;
+        width = type.width;
+        height = type.height;
+        color = type.color;
         coord = new Coord(0, Math.max(columns / 2 - width, 0));
     }
 
@@ -28,11 +26,20 @@ public class Piece {
             rotation += 4;
     }
 
+    public void drop() {
+        ++coord.x;
+    }
+
+    public void steer(int dir) {
+        coord.y += dir / dir;
+    }
+
     public Coord[] getBlockPositions() {
         Coord[] res = new Coord[4];
+        int[] data = type.getData();
 
         for (int i = 0; i < 4; ++i) {
-            int j = i % 4;
+            int j = data[i] % 4;
             int k = ((rotation == 0 || rotation == 3) && data[i] < 4)? 0 : 1;
             if (rotation % 2 == 0)
                 res[i] = new Coord(coord.x + k, coord.y + j);
@@ -41,5 +48,22 @@ public class Piece {
         }
 
         return res;
+    }
+
+    public Coord getCoord() {
+        return coord;
+    }
+
+    public int getWidth() {
+        return (rotation % 2 == 0)? width : height;
+    }
+
+    public int getHeight() {
+        return (rotation % 2 == 0)? height : width;
+    }
+
+    @Override
+    public String toString() {
+        return type.name() + "_PIECE";
     }
 }
