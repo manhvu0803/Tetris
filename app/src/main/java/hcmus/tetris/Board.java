@@ -67,6 +67,19 @@ public class Board {
             tickListener.run();
     }
 
+    public void steer(int dir) {
+        Piece piece = queue.peek();
+        if (piece == null)
+            return;
+
+        Coord[] colliders = (dir < 0)? piece.getLeftColliders() : piece.getRightColliders();
+        for (Coord coll : colliders)
+            if (coll.y >= columns || coll.y < 0 || pile[coll.x][coll.y] != 0)
+                return;
+        piece.steer(dir);
+        Log.d("Steer", "Steer: " + dir);
+    }
+
     public Piece getCurrentPiece() {
         return queue.peek();
     }

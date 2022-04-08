@@ -14,7 +14,7 @@ public class Piece {
     private final Coord coord;
     private final PieceType type;
     Coord[] blockPos;
-    List<Coord> downColliders, sideColliders;
+    List<Coord> downColliders, leftColliders, rightColliders;
 
     public Piece(PieceType type) {
         this(type, 0);
@@ -64,12 +64,13 @@ public class Piece {
         }
 
         // Calculate colliders
-        sideColliders = new ArrayList<>(10);
+        rightColliders = new ArrayList<>(5);
+        leftColliders = new ArrayList<>(5);
         downColliders = new ArrayList<>(4);
         for (Coord coord : blockPos) {
             updateCollider(set, downColliders, coord.x + 1, coord.y);
-            updateCollider(set, sideColliders, coord.x, coord.y + 1);
-            updateCollider(set, sideColliders, coord.x, coord.y - 1);
+            updateCollider(set, rightColliders, coord.x, coord.y + 1);
+            updateCollider(set, leftColliders, coord.x, coord.y - 1);
         }
     }
 
@@ -87,8 +88,12 @@ public class Piece {
         return downColliders.toArray(new Coord[0]);
     }
 
-    public Coord[] getSideColliders() {
-        return sideColliders.toArray(new Coord[0]);
+    public Coord[] getLeftColliders() {
+        return leftColliders.toArray(new Coord[0]);
+    }
+
+    public Coord[] getRightColliders() {
+        return rightColliders.toArray(new Coord[0]);
     }
 
     public Coord getCoord() {

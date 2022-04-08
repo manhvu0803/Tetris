@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.core.content.ContextCompat;
@@ -18,7 +20,7 @@ import java.util.TimerTask;
 /**
  * TODO: document your custom view class.
  */
-public class BoardView extends View {
+public class BoardView extends View implements View.OnTouchListener {
     final Paint boardPaint = new Paint();
     final Paint borderPaint = new Paint();
 
@@ -60,7 +62,7 @@ public class BoardView extends View {
             public void run() {
                 handler.sendMessage(handler.obtainMessage());
             }
-        }, 1000, 1000);
+        }, 1000, 100);
 
         handler = new Handler(getContext().getMainLooper()) {
             @Override
@@ -70,8 +72,10 @@ public class BoardView extends View {
         };
 
         borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setStrokeWidth(2);
+        borderPaint.setStrokeWidth(3);
         borderPaint.setColor(Color.BLACK);
+
+        this.setOnTouchListener(this);
 
         a.recycle();
     }
@@ -114,5 +118,20 @@ public class BoardView extends View {
                     drawUnit(canvas, i, j, 0, boardPaint);
                     drawUnit(canvas, i, j, -1, borderPaint);
                 }
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        Log.d("Touch", "Touch: " + motionEvent.getX() + "/" + view.getWidth());
+        if (motionEvent.getX() < view.getWidth() / 2f)
+            board.steer(-1);
+        else
+            board.steer(1);
+        return true;
+    }
+
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 }
