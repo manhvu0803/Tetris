@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
     <hcmus.tetris.BoardView
-        style="@style/Widget.Theme.Tetris.MyView"
         android:layout_width="300dp"
         android:layout_height="600dp"/>
 

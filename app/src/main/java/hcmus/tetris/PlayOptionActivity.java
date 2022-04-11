@@ -17,6 +17,11 @@ public class PlayOptionActivity extends AppCompatActivity implements View.OnClic
         btnPlayNew = (Button) findViewById(R.id.btnPlayNew);
         btnLoadGame = (Button) findViewById(R.id.btnLoadGame);
         btnBackToMain = (Button) findViewById(R.id.btnBackToMain);
+
+        btnPlayNew.setOnClickListener(this);
+        btnLoadGame.setOnClickListener(this);
+        btnBackToMain.setOnClickListener(this);
+
     }
 
     @Override
