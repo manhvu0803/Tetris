@@ -14,17 +14,8 @@ import hcmus.tetris.databinding.CustomHighScoreRowBinding;
 
 public class CustomHighScoreRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
-    //String[] times, names, highscores;
     ArrayList<HighScore> highScores;
 
-//    CustomHighScoreRowAdapter(Context context, int layoutToBeInflated,
-//                              String[] times, String[] names, String[] highscores){
-//        super(context, layoutToBeInflated, names);
-//        this.context = context;
-//        this.times = times;
-//        this.names = names;
-//        this.highscores = highscores;
-//    }
     CustomHighScoreRowAdapter(Context context, ArrayList<HighScore> highScores){
         this.context = context;
         this.highScores = highScores;
@@ -49,21 +40,6 @@ public class CustomHighScoreRowAdapter extends RecyclerView.Adapter<RecyclerView
     public int getItemCount() {
         return highScores.size();
     }
-
-//    @Override
-//    public View getView(int position, View convertView, ViewGroup parent) {
-//        LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-//        View row = inflater.inflate(R.layout.custom_high_score_row, null);
-//        TextView txtTime = (TextView) row.findViewById(R.id.txtTime);
-//        TextView txtName = (TextView) row.findViewById(R.id.txtName);
-//        TextView txtHighScore = (TextView) row.findViewById(R.id.txtHighScore);
-//
-//        txtTime.setText(times[position]);
-//        txtName.setText(names[position]);
-//        txtHighScore.setText(names[position]);
-//
-//        return (row);
-//    }
 
     private static class HighScoreViewHolder extends RecyclerView.ViewHolder{
         private final CustomHighScoreRowBinding binding;

@@ -14,10 +14,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnPlay = (Button) findViewById(R.id.btnPlay);
-        btnSetting = (Button) findViewById(R.id.btnSetting);
-        btnViewScore = (Button) findViewById(R.id.btnViewScore);
-        btnExitApp = (Button) findViewById(R.id.btnExitApp);
+        btnPlay = findViewById(R.id.btnPlay);
+        btnSetting = findViewById(R.id.btnSetting);
+        btnViewScore = findViewById(R.id.btnViewScore);
+        btnExitApp = findViewById(R.id.btnExitApp);
 
         btnPlay.setOnClickListener(this);
         btnSetting.setOnClickListener(this);

@@ -1,5 +1,7 @@
 package hcmus.tetris;
 
+import androidx.annotation.NonNull;
+
 public class Coord {
     public int x, y;
 
@@ -21,6 +23,7 @@ public class Coord {
         return c.x == this.x && c.y == this.y;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return x + "," + y;

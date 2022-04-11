@@ -14,9 +14,9 @@ public class PlayOptionActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_option);
-        btnPlayNew = (Button) findViewById(R.id.btnPlayNew);
-        btnLoadGame = (Button) findViewById(R.id.btnLoadGame);
-        btnBackToMain = (Button) findViewById(R.id.btnBackToMain);
+        btnPlayNew = findViewById(R.id.btnPlayNew);
+        btnLoadGame = findViewById(R.id.btnLoadGame);
+        btnBackToMain = findViewById(R.id.btnBackToMain);
 
         btnPlayNew.setOnClickListener(this);
         btnLoadGame.setOnClickListener(this);
