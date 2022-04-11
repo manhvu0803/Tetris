@@ -2,6 +2,7 @@ package hcmus.tetris;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ public class PlayOptionActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view) {
         switch (view.getId()){
             case (R.id.btnPlayNew):{
-                //move to create board screen
+                startActivity(new Intent(getApplicationContext(), GameActivity.class));
                 break;
             }
             case (R.id.btnLoadGame):{
