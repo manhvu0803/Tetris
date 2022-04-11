@@ -47,6 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:layout_marginStart="5dp"
         android:text="@string/time"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -76,10 +77,13 @@
         app:layout_constraintStart_toEndOf="@+id/txtNameTitle"
         app:layout_constraintTop_toTopOf="@+id/txtNameTitle"/>
 
-    <ListView
-        android:id="@+id/highScoreList"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/highScoreRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingStart="5dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
         app:layout_constraintTop_toBottomOf="@+id/txtNameTitle"/>
 
