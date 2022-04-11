@@ -13,9 +13,6 @@
             android:name=".ViewHighScoreActivity"
             android:exported="false" />
         <activity
-            android:name=".PlayOptionActivity"
-            android:exported="false" />
-        <activity
             android:name=".GameActivity"
             android:exported="false" />
         <activity
