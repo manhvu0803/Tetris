@@ -7,6 +7,13 @@
     tools:context=".ViewHighScoreActivity">
     <!--    Guideline helpers-->
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/start_vertical_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,14 +53,15 @@
         android:id="@+id/txtTimeTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:layout_marginStart="5dp"
+        android:gravity="center"
         android:text="@string/time"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="@+id/start_horizontal_guideline"/>
 
     <TextView
         android:id="@+id/txtNameTitle"
@@ -62,6 +70,8 @@
         android:text="@string/name"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline2"
         app:layout_constraintStart_toEndOf="@+id/txtTimeTitle"
         app:layout_constraintTop_toTopOf="@+id/txtTimeTitle"/>
@@ -73,6 +83,8 @@
         android:text="@string/score"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtNameTitle"
         app:layout_constraintTop_toTopOf="@+id/txtNameTitle"/>
@@ -81,7 +93,8 @@
         android:id="@+id/highScoreRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingStart="5dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="5dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
