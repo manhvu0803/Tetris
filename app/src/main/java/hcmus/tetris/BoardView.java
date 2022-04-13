@@ -27,6 +27,7 @@ public class BoardView extends View implements View.OnTouchListener {
 
     int rows, columns;
     float unit;
+    int backgroundColor;
 
     Board board;
     Timer timer;
@@ -55,6 +56,7 @@ public class BoardView extends View implements View.OnTouchListener {
 
         rows = a.getInt(R.styleable.BoardView_rows, 20);
         columns = a.getInt(R.styleable.BoardView_columns, 10);
+        backgroundColor = a.getColor(R.styleable.BoardView_backgroundColor, Color.BLACK);
 
         board = new Board(rows, columns);
         board.startGame();
@@ -120,7 +122,7 @@ public class BoardView extends View implements View.OnTouchListener {
     @Override
     protected void onDraw(Canvas canvas) {
         // Draw the background/board
-        boardPaint.setColor(Color.LTGRAY);
+        boardPaint.setColor(backgroundColor);
         canvas.drawRect(0f, 0f, (float)getMeasuredWidth(), (float)getMeasuredHeight(), boardPaint);
 
         // Draw the current piece
