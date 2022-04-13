@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -30,6 +31,8 @@ public class BoardView extends View implements View.OnTouchListener {
     Board board;
     Timer timer;
     Handler handler;
+
+    GestureDetector gestureDetector;
 
     public BoardView(Context context) {
         super(context);
@@ -76,6 +79,25 @@ public class BoardView extends View implements View.OnTouchListener {
         borderPaint.setColor(Color.BLACK);
 
         this.setOnTouchListener(this);
+        gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDown(MotionEvent motionEvent) {
+                return true;
+            }
+
+            @Override
+            public boolean onFling(MotionEvent me1, MotionEvent me2, float vx, float vy) {
+                Log.d("OnFling", "OnFling: " + (me2.getY() - me1.getY()));
+                float x1 = me1.getX(), y1 = me1.getY(), x2 = me2.getX(), y2 = me2.getY();
+                if (Math.abs(x2 - x1) <= 100) {
+                    if (y2 - y1 < 0)
+                        board.rotate(1);
+                    else
+                        board.hardDrop();
+                }
+                return true;
+            }
+        });
 
         a.recycle();
     }
@@ -122,16 +144,27 @@ public class BoardView extends View implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        Log.d("Touch", "Touch: " + motionEvent.getX() + "/" + view.getWidth());
-        if (motionEvent.getX() < view.getWidth() / 2f)
-            board.steer(-1);
-        else
-            board.steer(1);
-        return true;
+        if (gestureDetector.onTouchEvent(motionEvent))
+            return true;
+
+        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            Log.d("Touch", "Touch: " + motionEvent.getX() + "/" + view.getWidth());
+            if (motionEvent.getX() < view.getWidth() / 2f)
+                board.steer(-1);
+            else
+                board.steer(1);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
     public boolean performClick() {
         return super.performClick();
+    }
+
+    public void pause() {
+        board.pause();
     }
 }
