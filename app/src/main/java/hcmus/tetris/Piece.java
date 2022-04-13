@@ -1,5 +1,7 @@
 package hcmus.tetris;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -37,13 +39,8 @@ public class Piece {
         updateBlocks();
     }
 
-    public void drop() {
-        ++coord.x;
-        updateBlocks();
-    }
-
-    public void steer(int dir) {
-        coord.y += dir / Math.abs(dir);
+    public void move(int dx, int dy) {
+        coord.translate(dx, dy);
         updateBlocks();
     }
 
@@ -54,12 +51,22 @@ public class Piece {
         blockPos = new Coord[4];
         int[] data = type.getData();
         for (int i = 0; i < 4; ++i) {
+            // The column in the piece representation matrix
             int j = data[i] % 4;
-            int k = ((rotation == 0 || rotation == 3) && data[i] < 4)? 0 : 1;
+            if (rotation > 1)
+                j = 4 - j;
+            // The row in the piece representation matrix
+            int k = ((rotation == 0 || rotation == 3) == data[i] < 4)? 0 : 1;
+
             if (rotation % 2 == 0)
                 blockPos[i] = new Coord(coord.x + k, coord.y + j);
             else
                 blockPos[i] = new Coord(coord.x + j, coord.y + k);
+
+            if (rotation == 2)
+                blockPos[i].translate(0, -1);
+            if (rotation == 3)
+                blockPos[i].translate(-1, 0);
             set.add(blockPos[i]);
         }
 
