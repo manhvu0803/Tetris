@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35"/>
+        app:layout_constraintGuide_percent="0.47"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/mid_vertical_guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.66"/>
+        app:layout_constraintGuide_percent="0.53"/>
 
     <!--    Items-->
     <TextView
@@ -26,35 +26,22 @@
         android:layout_height="wrap_content"
         android:text="01/01/2022 00:00:00"
         android:textSize="20sp"
-        android:gravity="center"
         android:paddingBottom="15dp"
         app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/txtName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Someone"
-        android:textSize="20sp"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTime"
-        app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline2"
-        app:layout_constraintStart_toStartOf="@+id/mid_vertical_guideline"
-        app:layout_constraintTop_toTopOf="@+id/txtTime" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtHighScore"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
         android:text="1000"
         android:textSize="20sp"
-        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtName"
-        app:layout_constraintTop_toTopOf="@+id/txtName"/>
+        app:layout_constraintStart_toStartOf="@+id/mid_vertical_guideline2"
+        app:layout_constraintTop_toTopOf="@+id/txtTime" />
 
     <View
         android:id="@+id/view"

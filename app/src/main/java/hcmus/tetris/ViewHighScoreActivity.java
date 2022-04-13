@@ -13,7 +13,7 @@ public class ViewHighScoreActivity extends AppCompatActivity {
     Button btnBackToMain;
     RecyclerView highScoreRecyclerView;
     final ArrayList<HighScore> highScores = new ArrayList<>();
-    CustomHighScoreRowAdapter adapter;
+    CustomHighScoreAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class ViewHighScoreActivity extends AppCompatActivity {
             highScores.add(new HighScore("A" + i, "11/04/2022 12:12:00", i * 1000));
         }
 
-        adapter = new CustomHighScoreRowAdapter(this, highScores);
+        adapter = new CustomHighScoreAdapter(this, highScores);
         highScoreRecyclerView.setAdapter(adapter);
         highScoreRecyclerView.setVisibility(View.VISIBLE);
     }

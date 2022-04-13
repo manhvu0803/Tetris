@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 import hcmus.tetris.databinding.CustomHighScoreRowBinding;
 
-public class CustomHighScoreRowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     ArrayList<HighScore> highScores;
 
-    CustomHighScoreRowAdapter(Context context, ArrayList<HighScore> highScores){
+    CustomHighScoreAdapter(Context context, ArrayList<HighScore> highScores){
         this.context = context;
         this.highScores = highScores;
     }

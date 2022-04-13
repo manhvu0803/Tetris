@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case (R.id.btnLoadGame):{
-                //go to load screen
+                startActivity(new Intent(getApplicationContext(), LoadGamePlayActivity.class));
                 break;
             }
             case (R.id.btnSetting):{
-                //move to setting screen
+                startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                 break;
             }
             case (R.id.btnViewScore):{
