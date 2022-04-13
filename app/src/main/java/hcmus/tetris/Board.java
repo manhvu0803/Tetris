@@ -58,12 +58,20 @@ public class Board {
     }
 
     void tick() {
-        Piece piece = queue.peek();
+        Piece piece = getCurrentPiece();
         if (piece == null) {
             generateNewPiece();
             return;
         }
 
+        drop();
+
+        if (tickListener != null)
+            tickListener.run();
+    }
+
+    void drop() {
+        Piece piece = getCurrentPiece();
         Coord[] colliders = piece.getDownColliders();
         for (Coord coll : colliders)
             if (coll.x >= rows || pile[coll.x][coll.y] != 0) {
@@ -73,9 +81,6 @@ public class Board {
                 return;
             }
         piece.move(1, 0);
-
-        if (tickListener != null)
-            tickListener.run();
     }
 
     void addToPile(Piece piece) {
@@ -124,6 +129,12 @@ public class Board {
             if (coll.y >= columns || coll.y < 0 || pile[coll.x][coll.y] != 0)
                 return;
         piece.move(0, dir);
+    }
+
+    public void hardDrop() {
+        Piece piece = queue.peek();
+        while (piece == queue.peek())
+            drop();
     }
 
     public Piece getCurrentPiece() {
