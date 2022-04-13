@@ -6,16 +6,87 @@
     android:layout_height="match_parent"
     tools:context=".GameActivity">
 
-    <hcmus.tetris.BoardView
-        android:id="@+id/boardView"
+    <TextView
+        android:id="@+id/scoreTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:backgroundColor="@android:color/darker_gray"
-        app:columns="10"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="#F1EEEE"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="1500"
+        android:textColor="@color/black"
+        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rows="15" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTextView"
+        tools:layout_editor_absoluteX="-32dp">
+
+        <hcmus.tetris.BoardView
+            android:id="@+id/boardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="100dp"
+            app:backgroundColor="#433D3D"
+            app:columns="10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:rows="20" />
+
+        <hcmus.tetris.NextPieceView
+            android:id="@+id/nextPieceView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/gray_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/boardView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Next"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/nextPieceView"
+            app:layout_constraintStart_toStartOf="@+id/nextPieceView"
+            app:layout_constraintTop_toBottomOf="@+id/nextPieceView" />
+
+        <hcmus.tetris.NextPieceView
+            android:id="@+id/nextPieceView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/gray_400"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/boardView"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Hold"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/nextPieceView"
+            app:layout_constraintStart_toStartOf="@+id/nextPieceView"
+            app:layout_constraintTop_toBottomOf="@+id/nextPieceView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

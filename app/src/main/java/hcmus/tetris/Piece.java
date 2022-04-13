@@ -87,6 +87,14 @@ public class Piece {
             colliders.add(c);
     }
 
+    public int[] getModel() {
+        return type.getData();
+    }
+
+    public PieceType getType() {
+        return type;
+    }
+
     public Coord[] getBlockPositions() {
         return blockPos;
     }

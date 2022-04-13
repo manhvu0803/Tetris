@@ -13,6 +13,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         boardView = this.findViewById(R.id.boardView);
+        NextPieceView nextPieceView = this.findViewById(R.id.nextPieceView);
+        boardView.setOnNextPieceListener(nextPieceView::setNext);
 
         boolean createNewGame = this.getIntent().getBooleanExtra("newGame", true);
     }

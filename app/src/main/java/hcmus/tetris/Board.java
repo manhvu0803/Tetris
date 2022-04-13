@@ -14,6 +14,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Board {
+    interface OnNextPieceListener {
+        void onNewNextPiece(PieceType nextPiece);
+    }
+
     static PieceType[] pieceTypes = PieceType.values();
     static Random rng = new Random();
 
@@ -29,8 +33,10 @@ public class Board {
 
     Timer timer = new Timer();
     public Runnable tickListener = null;
+    public OnNextPieceListener nextPieceListener;
 
     Queue<Piece> queue = new LinkedList<>();
+    Piece currentPiece;
 
     public Board(int rows, int columns) {
         if (columns < 4)
@@ -41,6 +47,9 @@ public class Board {
         pile = new int[rows][columns];
         generateNewPiece();
         generateNewPiece();
+        currentPiece = queue.poll();
+        if (nextPieceListener != null)
+            nextPieceListener.onNewNextPiece(queue.peek().getType());
     }
 
     public void startGame() {
@@ -77,7 +86,9 @@ public class Board {
             if (coll.x >= rows || pile[coll.x][coll.y] != 0) {
                 addToPile(piece);
                 generateNewPiece();
-                queue.poll();
+                currentPiece = queue.poll();
+                if (nextPieceListener != null)
+                    nextPieceListener.onNewNextPiece(queue.peek().getType());
                 return;
             }
         piece.move(1, 0);
@@ -138,7 +149,7 @@ public class Board {
     }
 
     public Piece getCurrentPiece() {
-        return queue.peek();
+        return currentPiece;
     }
 
     public int[][] getPile() {

@@ -91,7 +91,7 @@ public class BoardView extends View implements View.OnTouchListener {
             public boolean onFling(MotionEvent me1, MotionEvent me2, float vx, float vy) {
                 Log.d("OnFling", "OnFling: " + (me2.getY() - me1.getY()));
                 float x1 = me1.getX(), y1 = me1.getY(), x2 = me2.getX(), y2 = me2.getY();
-                if (Math.abs(x2 - x1) <= 100) {
+                if (Math.abs(x2 - x1) <= 100 && Math.abs(y2 - y1) > 50) {
                     if (y2 - y1 < 0)
                         board.rotate(1);
                     else
@@ -168,5 +168,9 @@ public class BoardView extends View implements View.OnTouchListener {
 
     public void pause() {
         board.pause();
+    }
+
+    public void setOnNextPieceListener(Board.OnNextPieceListener listener) {
+        board.nextPieceListener = listener;
     }
 }
