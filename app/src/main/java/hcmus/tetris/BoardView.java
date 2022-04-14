@@ -77,7 +77,7 @@ public class BoardView extends View implements View.OnTouchListener {
         };
 
         borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setStrokeWidth(3);
+        borderPaint.setStrokeWidth(5);
         borderPaint.setColor(Color.BLACK);
 
         this.setOnTouchListener(this);
@@ -116,7 +116,8 @@ public class BoardView extends View implements View.OnTouchListener {
     public void drawUnit(Canvas canvas, float x, float y, float pad, Paint paint) {
         x *= unit;
         y *= unit;
-        canvas.drawRect(y + pad, x + pad, y + unit - pad, x + unit - pad, paint);
+        float r = unit / 5; // Radius of the round edge
+        canvas.drawRoundRect(y + pad, x + pad, y + unit - pad, x + unit - pad, r, r, paint);
     }
 
     @Override
@@ -140,7 +141,7 @@ public class BoardView extends View implements View.OnTouchListener {
                 if (pile[i][j] != 0) {
                     boardPaint.setColor(ContextCompat.getColor(getContext(), pile[i][j]));
                     drawUnit(canvas, i, j, 0, boardPaint);
-                    drawUnit(canvas, i, j, -1, borderPaint);
+                    drawUnit(canvas, i, j, 2, borderPaint);
                 }
     }
 

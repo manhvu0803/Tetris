@@ -68,9 +68,10 @@ public class NextPieceView extends View {
 
     private void drawUnit(float x, float y, float pad, Paint paint) {
         // Row-column shenanigan
-        x = x * unit + mw;
-        y = y * unit + mh;
-        canvas.drawRect(y + pad, x + pad, y + unit - pad, x + unit - pad, paint);
+        x = x * unit + mh;
+        y = y * unit + mw;
+        float r = unit / 5;
+        canvas.drawRoundRect(y + pad, x + pad, y + unit - pad, x + unit - pad, r, r, paint);
     }
 
     public void setNext(PieceType piece) {
