@@ -3,9 +3,12 @@ package hcmus.tetris;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements Board.OnLineClearListener {
     BoardView boardView;
+    TextView scoreView;
+    int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +26,11 @@ public class GameActivity extends AppCompatActivity {
     protected void onPause() {
         boardView.pause();
         super.onPause();
+    }
+
+    @Override
+    public void onLineClear(int row, int addScore) {
+        score += addScore;
+        scoreView.setText(score);
     }
 }

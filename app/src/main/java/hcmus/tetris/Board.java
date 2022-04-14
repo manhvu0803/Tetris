@@ -18,6 +18,10 @@ public class Board {
         void onNewNextPiece(PieceType nextPiece);
     }
 
+    interface OnLineClearListener {
+        void onLineClear(int row, int score);
+    }
+
     static PieceType[] pieceTypes = PieceType.values();
     static Random rng = new Random();
 
@@ -34,6 +38,7 @@ public class Board {
     Timer timer = new Timer();
     public Runnable tickListener = null;
     public OnNextPieceListener nextPieceListener;
+    public OnLineClearListener lineClearListener;
 
     Queue<Piece> queue = new LinkedList<>();
     Piece currentPiece;
@@ -48,7 +53,7 @@ public class Board {
         generateNewPiece();
         generateNewPiece();
         currentPiece = queue.poll();
-        if (nextPieceListener != null)
+        if (nextPieceListener != null && queue.peek() != null)
             nextPieceListener.onNewNextPiece(queue.peek().getType());
     }
 
@@ -87,7 +92,7 @@ public class Board {
                 addToPile(piece);
                 generateNewPiece();
                 currentPiece = queue.poll();
-                if (nextPieceListener != null)
+                if (nextPieceListener != null && queue.peek() != null)
                     nextPieceListener.onNewNextPiece(queue.peek().getType());
                 return;
             }
@@ -103,8 +108,11 @@ public class Board {
             for (int j = 0; j < columns; ++j)
                 if (pile[i][j] != 0)
                     ++cnt;
-            if (cnt >= columns)
+            if (cnt >= columns) {
                 ++diff;
+                if (lineClearListener != null)
+                    lineClearListener.onLineClear(i, 800);
+            }
             if (i - diff >= 0)
                 pile[i] = pile[i - diff];
             else
