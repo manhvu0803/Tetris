@@ -57,8 +57,10 @@ public class BoardView extends View implements View.OnTouchListener {
         rows = a.getInt(R.styleable.BoardView_rows, 20);
         columns = a.getInt(R.styleable.BoardView_columns, 10);
         backgroundColor = a.getColor(R.styleable.BoardView_backgroundColor, Color.BLACK);
+        int maxSpeed = a.getInt(R.styleable.BoardView_maxSpeed, 1200);
+        int minSpeed = a.getInt(R.styleable.BoardView_minSpeed, 100);
 
-        board = new Board(rows, columns);
+        board = new Board(rows, columns, minSpeed, maxSpeed);
         board.startGame();
 
         timer = new Timer();

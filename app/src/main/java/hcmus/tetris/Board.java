@@ -26,6 +26,8 @@ public class Board {
     static Random rng = new Random();
 
     int rows, columns;
+    int maxSpeed = 1200, minSpeed = 100;
+    int dropSpeed = 750;
     int[][] pile;
 
     Handler handler = new Handler(Looper.getMainLooper()) {
@@ -43,9 +45,18 @@ public class Board {
     Queue<Piece> queue = new LinkedList<>();
     Piece currentPiece;
 
+    public Board() {
+        this(20, 10);
+    }
+
     public Board(int rows, int columns) {
+        this(rows, columns, 100, 1200);
+    }
+
+    public Board(int rows, int columns, int minSpeed, int maxSpeed) {
         if (columns < 4)
             throw new IllegalArgumentException("Board needs at least 4 columns");
+
 
         this.rows = rows;
         this.columns = columns;
@@ -55,6 +66,14 @@ public class Board {
         currentPiece = queue.poll();
         if (nextPieceListener != null && queue.peek() != null)
             nextPieceListener.onNewNextPiece(queue.peek().getType());
+
+        this.maxSpeed = maxSpeed;
+        this.minSpeed = minSpeed;
+        dropSpeed = maxSpeed;
+    }
+
+    void changeSpeed(int speed) {
+        dropSpeed = Math.min(maxSpeed, Math.max(maxSpeed - speed, minSpeed));
     }
 
     public void startGame() {
@@ -63,7 +82,11 @@ public class Board {
             public void run() {
                 handler.sendMessage(handler.obtainMessage());
             }
-        }, 0, 750);
+        }, 0, dropSpeed);
+    }
+
+    public void pause() {
+        timer.cancel();
     }
 
     void generateNewPiece() {
@@ -162,9 +185,5 @@ public class Board {
 
     public int[][] getPile() {
         return pile;
-    }
-
-    public void pause() {
-        timer.cancel();
     }
 }
