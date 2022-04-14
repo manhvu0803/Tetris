@@ -18,6 +18,10 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
         boardView = this.findViewById(R.id.boardView);
         NextPieceView nextPieceView = this.findViewById(R.id.nextPieceView);
         boardView.setOnNextPieceListener(nextPieceView::setNext);
+        boardView.setOnLineClearListener(this);
+
+        scoreView = this.findViewById(R.id.scoreTextView);
+        scoreView.setText("0");
 
         boolean createNewGame = this.getIntent().getBooleanExtra("newGame", true);
     }
@@ -31,6 +35,6 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
     @Override
     public void onLineClear(int row, int addScore) {
         score += addScore;
-        scoreView.setText(score);
+        scoreView.setText(score + "");
     }
 }
