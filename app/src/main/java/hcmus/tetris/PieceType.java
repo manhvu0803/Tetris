@@ -9,7 +9,7 @@ public enum PieceType {
     ZR          (1, 2, 4, 5, R.color.light_blue_block),
     T           (1, 4, 5, 6, R.color.orange_block);
 
-    final int[] data = new int[4];
+    private final int[] data = new int[4];
     public final int width, height;
     public final int color;
 

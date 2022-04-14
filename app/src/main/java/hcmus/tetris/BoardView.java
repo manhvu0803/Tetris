@@ -27,6 +27,7 @@ public class BoardView extends View implements View.OnTouchListener {
 
     int rows, columns;
     float unit;
+    int backgroundColor;
 
     Board board;
     Timer timer;
@@ -55,8 +56,11 @@ public class BoardView extends View implements View.OnTouchListener {
 
         rows = a.getInt(R.styleable.BoardView_rows, 20);
         columns = a.getInt(R.styleable.BoardView_columns, 10);
+        backgroundColor = a.getColor(R.styleable.BoardView_backgroundColor, Color.BLACK);
+        int maxSpeed = a.getInt(R.styleable.BoardView_maxSpeed, 1200);
+        int minSpeed = a.getInt(R.styleable.BoardView_minSpeed, 100);
 
-        board = new Board(rows, columns);
+        board = new Board(rows, columns, minSpeed, maxSpeed);
         board.startGame();
 
         timer = new Timer();
@@ -75,7 +79,7 @@ public class BoardView extends View implements View.OnTouchListener {
         };
 
         borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setStrokeWidth(3);
+        borderPaint.setStrokeWidth(5);
         borderPaint.setColor(Color.BLACK);
 
         this.setOnTouchListener(this);
@@ -87,9 +91,8 @@ public class BoardView extends View implements View.OnTouchListener {
 
             @Override
             public boolean onFling(MotionEvent me1, MotionEvent me2, float vx, float vy) {
-                Log.d("OnFling", "OnFling: " + (me2.getY() - me1.getY()));
                 float x1 = me1.getX(), y1 = me1.getY(), x2 = me2.getX(), y2 = me2.getY();
-                if (Math.abs(x2 - x1) <= 100) {
+                if (Math.abs(x2 - x1) <= 100 && Math.abs(y2 - y1) > 50) {
                     if (y2 - y1 < 0)
                         board.rotate(1);
                     else
@@ -114,13 +117,14 @@ public class BoardView extends View implements View.OnTouchListener {
     public void drawUnit(Canvas canvas, float x, float y, float pad, Paint paint) {
         x *= unit;
         y *= unit;
-        canvas.drawRect(y + pad, x + pad, y + unit - pad, x + unit - pad, paint);
+        float r = unit / 5; // Radius of the round edge
+        canvas.drawRoundRect(y + pad, x + pad, y + unit - pad, x + unit - pad, r, r, paint);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         // Draw the background/board
-        boardPaint.setColor(Color.LTGRAY);
+        boardPaint.setColor(backgroundColor);
         canvas.drawRect(0f, 0f, (float)getMeasuredWidth(), (float)getMeasuredHeight(), boardPaint);
 
         // Draw the current piece
@@ -138,7 +142,7 @@ public class BoardView extends View implements View.OnTouchListener {
                 if (pile[i][j] != 0) {
                     boardPaint.setColor(ContextCompat.getColor(getContext(), pile[i][j]));
                     drawUnit(canvas, i, j, 0, boardPaint);
-                    drawUnit(canvas, i, j, -1, borderPaint);
+                    drawUnit(canvas, i, j, 2, borderPaint);
                 }
     }
 
@@ -166,5 +170,21 @@ public class BoardView extends View implements View.OnTouchListener {
 
     public void pause() {
         board.pause();
+    }
+
+    /**
+     *
+     * @return PieceType of holding piece
+     */
+    public PieceType hold() {
+        return board.hold();
+    }
+
+    public void setOnNextPieceListener(Board.OnNextPieceListener listener) {
+        board.nextPieceListener = listener;
+    }
+
+    public void setOnLineClearListener(Board.OnLineClearListener listener) {
+        board.lineClearListener = listener;
     }
 }

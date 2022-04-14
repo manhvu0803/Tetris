@@ -14,10 +14,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Board {
+    interface OnNextPieceListener {
+        void onNewNextPiece(PieceType nextPiece);
+    }
+
+    interface OnLineClearListener {
+        void onLineClear(int row, int score);
+    }
+
     static PieceType[] pieceTypes = PieceType.values();
     static Random rng = new Random();
 
     int rows, columns;
+    int maxSpeed, minSpeed;
+    int dropSpeed;
     int[][] pile;
 
     Handler handler = new Handler(Looper.getMainLooper()) {
@@ -29,18 +39,42 @@ public class Board {
 
     Timer timer = new Timer();
     public Runnable tickListener = null;
+    public OnNextPieceListener nextPieceListener;
+    public OnLineClearListener lineClearListener;
 
     Queue<Piece> queue = new LinkedList<>();
+    Piece currentPiece;
+    Piece holdPiece;
+
+    public Board() {
+        this(20, 10);
+    }
 
     public Board(int rows, int columns) {
+        this(rows, columns, 100, 1200);
+    }
+
+    public Board(int rows, int columns, int minSpeed, int maxSpeed) {
         if (columns < 4)
             throw new IllegalArgumentException("Board needs at least 4 columns");
+
 
         this.rows = rows;
         this.columns = columns;
         pile = new int[rows][columns];
         generateNewPiece();
         generateNewPiece();
+        currentPiece = queue.poll();
+        if (nextPieceListener != null && queue.peek() != null)
+            nextPieceListener.onNewNextPiece(queue.peek().getType());
+
+        this.maxSpeed = maxSpeed;
+        this.minSpeed = minSpeed;
+        dropSpeed = maxSpeed;
+    }
+
+    void changeSpeed(int speed) {
+        dropSpeed = Math.min(maxSpeed, Math.max(maxSpeed - speed, minSpeed));
     }
 
     public void startGame() {
@@ -49,7 +83,11 @@ public class Board {
             public void run() {
                 handler.sendMessage(handler.obtainMessage());
             }
-        }, 0, 750);
+        }, 0, dropSpeed);
+    }
+
+    public void pause() {
+        timer.cancel();
     }
 
     void generateNewPiece() {
@@ -70,17 +108,38 @@ public class Board {
             tickListener.run();
     }
 
+    /**
+     *
+     * @return PieceType of holding piece
+     */
+    public PieceType hold() {
+        Piece oldHold = holdPiece;
+        holdPiece = getCurrentPiece();
+        if (oldHold == null)
+            pushNextPiece();
+        else
+            currentPiece = oldHold;
+
+        return holdPiece.getType();
+    }
+
     void drop() {
         Piece piece = getCurrentPiece();
         Coord[] colliders = piece.getDownColliders();
         for (Coord coll : colliders)
             if (coll.x >= rows || pile[coll.x][coll.y] != 0) {
                 addToPile(piece);
-                generateNewPiece();
-                queue.poll();
+                pushNextPiece();
                 return;
             }
         piece.move(1, 0);
+    }
+
+    void pushNextPiece() {
+        generateNewPiece();
+        currentPiece = queue.poll();
+        if (nextPieceListener != null && queue.peek() != null)
+            nextPieceListener.onNewNextPiece(queue.peek().getType());
     }
 
     void addToPile(Piece piece) {
@@ -92,8 +151,11 @@ public class Board {
             for (int j = 0; j < columns; ++j)
                 if (pile[i][j] != 0)
                     ++cnt;
-            if (cnt >= columns)
+            if (cnt >= columns) {
                 ++diff;
+                if (lineClearListener != null)
+                    lineClearListener.onLineClear(i, 800);
+            }
             if (i - diff >= 0)
                 pile[i] = pile[i - diff];
             else
@@ -138,14 +200,10 @@ public class Board {
     }
 
     public Piece getCurrentPiece() {
-        return queue.peek();
+        return currentPiece;
     }
 
     public int[][] getPile() {
         return pile;
-    }
-
-    public void pause() {
-        timer.cancel();
     }
 }
