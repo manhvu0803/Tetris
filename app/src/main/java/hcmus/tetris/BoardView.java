@@ -172,6 +172,14 @@ public class BoardView extends View implements View.OnTouchListener {
         board.pause();
     }
 
+    /**
+     *
+     * @return PieceType of holding piece
+     */
+    public PieceType hold() {
+        return board.hold();
+    }
+
     public void setOnNextPieceListener(Board.OnNextPieceListener listener) {
         board.nextPieceListener = listener;
     }

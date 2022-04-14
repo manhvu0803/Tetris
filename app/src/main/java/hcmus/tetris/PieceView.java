@@ -9,7 +9,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class NextPieceView extends View {
+public class PieceView extends View {
     PieceType nextPiece = null;
 
     float unit;
@@ -19,17 +19,17 @@ public class NextPieceView extends View {
     // margin
     float mw, mh;
 
-    public NextPieceView(Context context) {
+    public PieceView(Context context) {
         super(context);
         init();
     }
 
-    public NextPieceView(Context context, AttributeSet attrs) {
+    public PieceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public NextPieceView(Context context, AttributeSet attrs, int values) {
+    public PieceView(Context context, AttributeSet attrs, int values) {
         super(context, attrs, values);
         init();
     }
@@ -74,7 +74,7 @@ public class NextPieceView extends View {
         canvas.drawRoundRect(y + pad, x + pad, y + unit - pad, x + unit - pad, r, r, paint);
     }
 
-    public void setNext(PieceType piece) {
+    public void setPiece(PieceType piece) {
         nextPiece = piece;
         invalidate();
     }

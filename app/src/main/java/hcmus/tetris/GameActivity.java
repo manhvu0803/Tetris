@@ -16,8 +16,10 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
         setContentView(R.layout.activity_game);
 
         boardView = this.findViewById(R.id.boardView);
-        NextPieceView nextPieceView = this.findViewById(R.id.nextPieceView);
-        boardView.setOnNextPieceListener(nextPieceView::setNext);
+        PieceView nextPieceView = this.findViewById(R.id.nextPieceView);
+        PieceView holdView = this.findViewById(R.id.holdPieceView);
+        holdView.setOnClickListener((View) -> holdView.setPiece(boardView.hold()));
+        boardView.setOnNextPieceListener(nextPieceView::setPiece);
         boardView.setOnLineClearListener(this);
 
         scoreView = this.findViewById(R.id.scoreTextView);

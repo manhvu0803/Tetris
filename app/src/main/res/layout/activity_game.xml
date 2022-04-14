@@ -46,7 +46,7 @@
             app:minSpeed="100"
             app:rows="20" />
 
-        <hcmus.tetris.NextPieceView
+        <hcmus.tetris.PieceView
             android:id="@+id/nextPieceView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,8 +68,8 @@
             app:layout_constraintStart_toStartOf="@+id/nextPieceView"
             app:layout_constraintTop_toBottomOf="@+id/nextPieceView" />
 
-        <hcmus.tetris.NextPieceView
-            android:id="@+id/nextPieceView2"
+        <hcmus.tetris.PieceView
+            android:id="@+id/holdPieceView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -88,7 +88,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/nextPieceView"
             app:layout_constraintStart_toStartOf="@+id/nextPieceView"
-            app:layout_constraintTop_toBottomOf="@+id/nextPieceView2" />
+            app:layout_constraintTop_toBottomOf="@+id/holdPieceView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

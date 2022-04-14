@@ -26,8 +26,8 @@ public class Board {
     static Random rng = new Random();
 
     int rows, columns;
-    int maxSpeed = 1200, minSpeed = 100;
-    int dropSpeed = 750;
+    int maxSpeed, minSpeed;
+    int dropSpeed;
     int[][] pile;
 
     Handler handler = new Handler(Looper.getMainLooper()) {
@@ -44,6 +44,7 @@ public class Board {
 
     Queue<Piece> queue = new LinkedList<>();
     Piece currentPiece;
+    Piece holdPiece;
 
     public Board() {
         this(20, 10);
@@ -107,19 +108,38 @@ public class Board {
             tickListener.run();
     }
 
+    /**
+     *
+     * @return PieceType of holding piece
+     */
+    public PieceType hold() {
+        Piece oldHold = holdPiece;
+        holdPiece = getCurrentPiece();
+        if (oldHold == null)
+            pushNextPiece();
+        else
+            currentPiece = oldHold;
+
+        return holdPiece.getType();
+    }
+
     void drop() {
         Piece piece = getCurrentPiece();
         Coord[] colliders = piece.getDownColliders();
         for (Coord coll : colliders)
             if (coll.x >= rows || pile[coll.x][coll.y] != 0) {
                 addToPile(piece);
-                generateNewPiece();
-                currentPiece = queue.poll();
-                if (nextPieceListener != null && queue.peek() != null)
-                    nextPieceListener.onNewNextPiece(queue.peek().getType());
+                pushNextPiece();
                 return;
             }
         piece.move(1, 0);
+    }
+
+    void pushNextPiece() {
+        generateNewPiece();
+        currentPiece = queue.poll();
+        if (nextPieceListener != null && queue.peek() != null)
+            nextPieceListener.onNewNextPiece(queue.peek().getType());
     }
 
     void addToPile(Piece piece) {
