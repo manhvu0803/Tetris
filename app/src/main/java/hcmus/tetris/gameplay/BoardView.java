@@ -191,7 +191,12 @@ public class BoardView extends View implements View.OnTouchListener {
         board.lineClearListener = listener;
     }
 
+    public void setOnGameOverListener(Board.OnGameOverListener listener) {
+        board.gameOverListener = listener;
+    }
+
     public void setLineClearScore(int score) {
         board.setLineClearScore(score);
     }
+
 }

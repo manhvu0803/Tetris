@@ -15,12 +15,16 @@ import java.util.TimerTask;
 import hcmus.tetris.Coord;
 
 public class Board {
-    interface OnNextPieceListener {
+    public interface OnNextPieceListener {
         void onNewNextPiece(PieceType nextPiece);
     }
 
-    interface OnLineClearListener {
+    public interface OnLineClearListener {
         void onLineClear(int row, int score);
+    }
+
+    public interface OnGameOverListener {
+        void onGameOver();
     }
 
     static PieceType[] pieceTypes = PieceType.values();
@@ -43,6 +47,7 @@ public class Board {
     public Runnable tickListener = null;
     public OnNextPieceListener nextPieceListener;
     public OnLineClearListener lineClearListener;
+    public OnGameOverListener gameOverListener;
 
     Queue<Piece> queue = new LinkedList<>();
     Piece currentPiece;
@@ -145,8 +150,12 @@ public class Board {
     }
 
     void addToPile(Piece piece) {
+        if (piece.getCoord().x == 0)
+            gameOverListener.onGameOver();
+
         for (Coord coord : piece.getBlockPositions())
             pile[coord.x][coord.y] = piece.color;
+
         int diff = 0;
         for (int i = rows - 1; i >= 0; --i) {
             int cnt = 0;

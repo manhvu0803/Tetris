@@ -2,6 +2,7 @@ package hcmus.tetris;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -11,7 +12,7 @@ import hcmus.tetris.gameplay.Board;
 import hcmus.tetris.gameplay.BoardView;
 import hcmus.tetris.gameplay.PieceView;
 
-public class GameActivity extends AppCompatActivity implements Board.OnLineClearListener {
+public class GameActivity extends AppCompatActivity implements Board.OnLineClearListener, Board.OnGameOverListener {
     BoardView boardView;
     TextView scoreView;
     int score = 0;
@@ -24,11 +25,16 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
         Setting setting = SettingDAO.getInstance().getSetting(getApplicationContext());
 
         boardView = this.findViewById(R.id.boardView);
-        PieceView nextPieceView = this.findViewById(R.id.nextPieceView);
+
         PieceView holdView = this.findViewById(R.id.holdPieceView);
         holdView.setOnClickListener((View) -> holdView.setPiece(boardView.hold()));
+
+        PieceView nextPieceView = this.findViewById(R.id.nextPieceView);
         boardView.setOnNextPieceListener(nextPieceView::setPiece);
+
         boardView.setOnLineClearListener(this);
+        boardView.setOnGameOverListener(this);
+
         boardView.setLineClearScore((int)setting.getLineScore());
 
         scoreView = this.findViewById(R.id.scoreTextView);
@@ -47,5 +53,12 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
     public void onLineClear(int row, int addScore) {
         score += addScore;
         scoreView.setText(score + "");
+    }
+
+    @Override
+    public void onGameOver() {
+        Intent intent = new Intent(this, SaveScoreActivity.class);
+        intent.putExtra("score", score);
+        startActivity(intent);
     }
 }
