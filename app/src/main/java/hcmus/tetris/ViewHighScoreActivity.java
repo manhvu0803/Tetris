@@ -31,14 +31,8 @@ public class ViewHighScoreActivity extends AppCompatActivity {
 
         //get current high score list in database
         highScoreDAO = HighScoreDAO.getInstance();
-
-        //test
-        LocalDateTime now = LocalDateTime.now();
-        highScoreDAO.saveHighScoreToDTB(getApplicationContext(), new HighScore(
-                "AA", DAOHelper.formatDateTime(now), 1000
-        ));
-
         highScores = highScoreDAO.getHighScores(getApplicationContext());
+
         //reverse highScores list
         highScores.sort((obj1, obj2) -> obj2.getDateTime().compareTo(obj1.getDateTime()));
 
