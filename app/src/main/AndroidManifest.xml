@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tetris">
         <activity
+            android:name=".SaveScoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoadGamePlayActivity"
             android:exported="false" />
         <activity
