@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import hcmus.tetris.dto.HighScore;
+
 public class ViewHighScoreActivity extends AppCompatActivity {
     Button btnBackToMain;
     RecyclerView highScoreRecyclerView;

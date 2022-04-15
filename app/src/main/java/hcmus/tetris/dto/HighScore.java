@@ -1,4 +1,4 @@
-package hcmus.tetris;
+package hcmus.tetris.dto;
 
 public class HighScore {
     String name, dateTime;
@@ -9,4 +9,8 @@ public class HighScore {
         this.dateTime = dateTime;
         this.score = score;
     }
+
+    public String getName() { return name; }
+    public String getDateTime() { return dateTime; }
+    public long getScore() { return score; }
 }

@@ -107,7 +107,9 @@
         android:layout_marginTop="30dp"
         android:text="@string/back"
         android:textSize="20sp"
-        android:textStyle="italic"
+        android:textStyle="bold"
+        android:background="@drawable/custom_round_button"
+        android:backgroundTint="@color/gray_200"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_guideline"/>

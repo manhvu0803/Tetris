@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hcmus.tetris.databinding.CustomHighScoreRowBinding;
+import hcmus.tetris.dto.HighScore;
 
 public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
@@ -50,9 +51,9 @@ public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         @SuppressLint("SetTextI18n")
         public void setData(HighScore highScore)
         {
-            binding.txtTime.setText(highScore.dateTime);
-            binding.txtName.setText(highScore.name);
-            binding.txtHighScore.setText(Long.toString(highScore.score));
+            binding.txtTime.setText(highScore.getDateTime());
+            binding.txtName.setText(highScore.getName());
+            binding.txtHighScore.setText(Long.toString(highScore.getScore()));
         }
     }
 }

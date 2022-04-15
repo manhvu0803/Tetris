@@ -7,19 +7,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import hcmus.tetris.ults.DAOHelper;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button btnPlayNew, btnLoadGame, btnSetting, btnViewScore, btnExitApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //create database if needed
+        DAOHelper.createDatabaseIfNotExists(getApplicationContext());
+
         setContentView(R.layout.activity_main);
+
+        //get widgets
         btnPlayNew = findViewById(R.id.btnPlayNew);
         btnLoadGame = findViewById(R.id.btnLoadGame);
         btnSetting = findViewById(R.id.btnSetting);
         btnViewScore = findViewById(R.id.btnViewScore);
         btnExitApp = findViewById(R.id.btnExitApp);
 
+        //set OnClickListener
         btnPlayNew.setOnClickListener(this);
         btnLoadGame.setOnClickListener(this);
         btnSetting.setOnClickListener(this);

@@ -9,6 +9,8 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
+import hcmus.tetris.dto.SaveGame;
+
 public class LoadGamePlayActivity extends AppCompatActivity {
     Button btnBackToMain;
     RecyclerView saveGameRecyclerView;

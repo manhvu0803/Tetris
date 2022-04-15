@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hcmus.tetris.databinding.CustomSaveGameRowBinding;
+import hcmus.tetris.dto.SaveGame;
 
 public class CustomSaveGameAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
@@ -50,8 +51,8 @@ public class CustomSaveGameAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         @SuppressLint("SetTextI18n")
         public void setData(SaveGame saveGame)
         {
-            binding.txtTime.setText(saveGame.dateTime);
-            binding.txtHighScore.setText(Long.toString(saveGame.score));
+            binding.txtTime.setText(saveGame.getDateTime());
+            binding.txtHighScore.setText(Long.toString(saveGame.getScore()));
         }
     }
 }
