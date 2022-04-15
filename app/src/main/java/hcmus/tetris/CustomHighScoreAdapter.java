@@ -25,7 +25,6 @@ public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("OK");
         return new HighScoreViewHolder(
                 CustomHighScoreRowBinding.inflate(LayoutInflater.from(parent.getContext()), parent,
                         false));
@@ -34,7 +33,6 @@ public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((HighScoreViewHolder) holder).setData(highScores.get(position));
-        System.out.println("OK2");
     }
 
     @Override

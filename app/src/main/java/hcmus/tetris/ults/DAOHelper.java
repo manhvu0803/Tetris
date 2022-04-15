@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import hcmus.tetris.R;
 
@@ -75,5 +77,10 @@ public class DAOHelper {
                 }
             }
         }
+    }
+
+    static public String formatDateTime(LocalDateTime dateTime){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return dateTime.format(dateTimeFormatter);
     }
 }

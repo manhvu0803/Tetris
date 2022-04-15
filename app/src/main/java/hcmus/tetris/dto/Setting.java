@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Setting {
     long scoreLimit, lineScore;
     String controlScheme;
-    ArrayList<ArrayList<String>> timeLevels;
+    ArrayList<ArrayList<Integer>> timeLevels;
     int width, height;
 
     public Setting(long scoreLimit, long lineScore, String controlScheme,
-                   ArrayList<ArrayList<String>> timeLevels, int width, int height){
+                   ArrayList<ArrayList<Integer>> timeLevels, int width, int height){
         this.scoreLimit = scoreLimit;
         this.lineScore = lineScore;
         this.controlScheme = controlScheme;
@@ -21,7 +21,7 @@ public class Setting {
     public long getScoreLimit() { return scoreLimit; }
     public long getLineScore() { return lineScore; }
     public String getControlScheme() { return controlScheme; }
-    public ArrayList<ArrayList<String>> getTimeLevels() { return timeLevels; }
+    public ArrayList<ArrayList<Integer>> getTimeLevels() { return timeLevels; }
     public int getWidth() { return width; }
     public int getHeight() { return height; }
 }

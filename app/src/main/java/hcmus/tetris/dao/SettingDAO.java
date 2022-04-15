@@ -1,7 +1,6 @@
 package hcmus.tetris.dao;
 
 import android.content.Context;
-import android.content.res.XmlResourceParser;
 import android.util.Xml;
 import android.widget.EditText;
 
@@ -14,14 +13,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -34,7 +30,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import hcmus.tetris.dto.Setting;
-import hcmus.tetris.ults.Constants;
 import hcmus.tetris.ults.DAOHelper;
 
 public class SettingDAO {
@@ -110,7 +105,7 @@ public class SettingDAO {
             //variables to store Setting's data
             long scoreLimit = -1, lineScore = -1;
             String controlScheme = null;
-            ArrayList<ArrayList<String>> timeLevels = null;
+            ArrayList<ArrayList<Integer>> timeLevels = null;
             int width = -1, height  = -1;
 
             //start reading Setting tag
@@ -118,31 +113,42 @@ public class SettingDAO {
             while (parserSetting.next() != XmlPullParser.END_TAG) {
                 if (parserSetting.getEventType() == XmlPullParser.START_TAG) {
                     String childName = parserSetting.getName();
-                    if (childName.equals("ScoreLimit")) {
-                        parserSetting.require(XmlPullParser.START_TAG, null, "ScoreLimit");
-                        scoreLimit = Long.parseLong(parserSetting.getAttributeValue(null, "value"));
-                        parserSetting.next();
-                        parserSetting.require(XmlPullParser.END_TAG, null, "ScoreLimit");
-                    } else if (childName.equals("LineScore")) {
-                        parserSetting.require(XmlPullParser.START_TAG, null, "LineScore");
-                        lineScore = Long.parseLong(parserSetting.getAttributeValue(null, "value"));
-                        parserSetting.next();
-                        parserSetting.require(XmlPullParser.END_TAG, null, "LineScore");
-                    } else if (childName.equals("TimeLevel")) {
-                        parserSetting.require(XmlPullParser.START_TAG, null, "TimeLevel");
-                        timeLevels = readTimeLevel();
-                        parserSetting.require(XmlPullParser.END_TAG, null, "TimeLevel");
-                    } else if (childName.equals("ControlScheme")) {
-                        parserSetting.require(XmlPullParser.START_TAG, null, "ControlScheme");
-                        controlScheme = parserSetting.getAttributeValue(null, "value");
-                        parserSetting.next();
-                        parserSetting.require(XmlPullParser.END_TAG, null, "ControlScheme");
-                    } else if (childName.equals("BoardSize")){
-                        parserSetting.require(XmlPullParser.START_TAG, null, "BoardSize");
-                        width = Integer.parseInt(parserSetting.getAttributeValue(null, "width"));
-                        height = Integer.parseInt(parserSetting.getAttributeValue(null, "height"));
-                        parserSetting.next();
-                        parserSetting.require(XmlPullParser.END_TAG, null, "BoardSize");
+                    switch (childName) {
+                        case "ScoreLimit": {
+                            parserSetting.require(XmlPullParser.START_TAG, null, "ScoreLimit");
+                            scoreLimit = Long.parseLong(parserSetting.getAttributeValue(null, "value"));
+                            parserSetting.next();
+                            parserSetting.require(XmlPullParser.END_TAG, null, "ScoreLimit");
+                            break;
+                        }
+                        case "LineScore": {
+                            parserSetting.require(XmlPullParser.START_TAG, null, "LineScore");
+                            lineScore = Long.parseLong(parserSetting.getAttributeValue(null, "value"));
+                            parserSetting.next();
+                            parserSetting.require(XmlPullParser.END_TAG, null, "LineScore");
+                            break;
+                        }
+                        case "TimeLevel": {
+                            parserSetting.require(XmlPullParser.START_TAG, null, "TimeLevel");
+                            timeLevels = readTimeLevel();
+                            parserSetting.require(XmlPullParser.END_TAG, null, "TimeLevel");
+                            break;
+                        }
+                        case "ControlScheme": {
+                            parserSetting.require(XmlPullParser.START_TAG, null, "ControlScheme");
+                            controlScheme = parserSetting.getAttributeValue(null, "value");
+                            parserSetting.next();
+                            parserSetting.require(XmlPullParser.END_TAG, null, "ControlScheme");
+                            break;
+                        }
+                        case "BoardSize": {
+                            parserSetting.require(XmlPullParser.START_TAG, null, "BoardSize");
+                            width = Integer.parseInt(parserSetting.getAttributeValue(null, "width"));
+                            height = Integer.parseInt(parserSetting.getAttributeValue(null, "height"));
+                            parserSetting.next();
+                            parserSetting.require(XmlPullParser.END_TAG, null, "BoardSize");
+                            break;
+                        }
                     }
                 }
             }
@@ -163,14 +169,14 @@ public class SettingDAO {
         return setting;
     }
 
-    private ArrayList<ArrayList<String>> readTimeLevel() {
-        ArrayList<ArrayList<String>> timeLevel = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> readTimeLevel() {
+        ArrayList<ArrayList<Integer>> timeLevel = new ArrayList<>();
         try {
             while (parserSetting.next() != XmlPullParser.END_TAG) {
                 if (parserSetting.getEventType() == XmlPullParser.START_TAG) {
-                    ArrayList<String> level = new ArrayList<>();
-                    level.add(parserSetting.getAttributeValue(null, "timestamp"));
-                    level.add(parserSetting.getAttributeValue(null, "dropspeed"));
+                    ArrayList<Integer> level = new ArrayList<>();
+                    level.add(Integer.parseInt(parserSetting.getAttributeValue(null, "timestamp")));
+                    level.add(Integer.parseInt(parserSetting.getAttributeValue(null, "dropspeed")));
                     timeLevel.add(level);
                     parserSetting.next();
                 }
@@ -188,17 +194,17 @@ public class SettingDAO {
         DocumentBuilderFactory docBuildFac = DocumentBuilderFactory.newInstance();
         FileInputStream fileInputStream = null;
         FileOutputStream fileOutputStream = null;
-        InputStream inputStream = null;
         String database = "database.xml";
         try {
             fileInputStream = context.openFileInput(database);
-            inputStream = new ByteArrayInputStream(database.getBytes(StandardCharsets.UTF_8));
             try {
+                //get DOM from database.xml
                 DocumentBuilder builder = docBuildFac.newDocumentBuilder();
                 Document doc = builder.parse(fileInputStream);
                 Node settingNode = doc.getElementsByTagName("Setting").item(0);
                 NodeList settingChildren = settingNode.getChildNodes();
-                for (int i = 0; i < settingChildren.getLength(); i++){
+                int numChildren = settingChildren.getLength();
+                for (int i = 0; i < numChildren; i++){
                     Node child = settingChildren.item(i);
                     NamedNodeMap att = child.getAttributes();
                     switch (child.getNodeName()) {
@@ -241,6 +247,7 @@ public class SettingDAO {
                     }
                 }
 
+                //save DOM to database.xml
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();
                 Transformer transformer = transformerFactory.newTransformer();
                 DOMSource domSource = new DOMSource(doc);

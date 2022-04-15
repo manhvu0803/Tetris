@@ -37,8 +37,8 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //get current setting in database
         settingDAO = SettingDAO.getInstance();
-        //settingDAO.setParserSetting(DAOHelper.getParser(getApplicationContext()));
         setting = settingDAO.getSetting(getApplicationContext());
 
         setContentView(R.layout.activity_setting);
@@ -124,11 +124,11 @@ public class SettingActivity extends AppCompatActivity {
 
         //levels
         int levelNum = setting.getTimeLevels().size();
-        ArrayList<ArrayList<String>> timeLevels = setting.getTimeLevels();
+        ArrayList<ArrayList<Integer>> timeLevels = setting.getTimeLevels();
         int j = 0;
         for (int i = 0; i < levelNum; i++){
-            timeLevelEditTextList.get(j).setText(timeLevels.get(i).get(0));
-            timeLevelEditTextList.get(j + 1).setText(timeLevels.get(i).get(1));
+            timeLevelEditTextList.get(j).setText(timeLevels.get(i).get(0).toString());
+            timeLevelEditTextList.get(j + 1).setText(timeLevels.get(i).get(1).toString());
             j += 2;
         }
 
