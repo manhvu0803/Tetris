@@ -7,13 +7,10 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import hcmus.tetris.dao.HighScoreDAO;
-import hcmus.tetris.dao.SettingDAO;
 import hcmus.tetris.dto.HighScore;
-import hcmus.tetris.ults.DAOHelper;
 
 public class ViewHighScoreActivity extends AppCompatActivity {
     //widget variables

@@ -5,22 +5,17 @@ import android.util.Xml;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -113,7 +108,6 @@ public class HighScoreDAO {
             parserHighScore.require(XmlPullParser.START_TAG, null, "HighScore");
             while (parserHighScore.next() != XmlPullParser.END_TAG) {
                 if (parserHighScore.getEventType() == XmlPullParser.START_TAG) {
-                    String childName = parserHighScore.getName();
                     parserHighScore.require(XmlPullParser.START_TAG, null, "Score");
                     value = Long.parseLong(parserHighScore.getAttributeValue(null, "value"));
                     timeStamp = parserHighScore.getAttributeValue(null, "timestamp");
