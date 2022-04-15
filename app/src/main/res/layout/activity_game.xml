@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/scoreTextView"
         tools:layout_editor_absoluteX="-32dp">
 
-        <hcmus.tetris.BoardView
+        <hcmus.tetris.gameplay.BoardView
             android:id="@+id/boardView"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -46,7 +46,7 @@
             app:minSpeed="100"
             app:rows="20" />
 
-        <hcmus.tetris.PieceView
+        <hcmus.tetris.gameplay.PieceView
             android:id="@+id/nextPieceView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             app:layout_constraintStart_toStartOf="@+id/nextPieceView"
             app:layout_constraintTop_toBottomOf="@+id/nextPieceView" />
 
-        <hcmus.tetris.PieceView
+        <hcmus.tetris.gameplay.PieceView
             android:id="@+id/holdPieceView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

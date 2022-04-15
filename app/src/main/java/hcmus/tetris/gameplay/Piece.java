@@ -1,6 +1,4 @@
-package hcmus.tetris;
-
-import android.util.Log;
+package hcmus.tetris.gameplay;
 
 import androidx.annotation.NonNull;
 
@@ -8,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import hcmus.tetris.Coord;
 
 public class Piece {
     public final int color;

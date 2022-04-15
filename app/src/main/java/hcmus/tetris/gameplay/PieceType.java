@@ -1,4 +1,6 @@
-package hcmus.tetris;
+package hcmus.tetris.gameplay;
+
+import hcmus.tetris.R;
 
 public enum PieceType {
     SQUARE      (0, 1, 4, 5, R.color.yellow_block),

@@ -5,6 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import hcmus.tetris.dao.SettingDAO;
+import hcmus.tetris.dto.Setting;
+import hcmus.tetris.gameplay.Board;
+import hcmus.tetris.gameplay.BoardView;
+import hcmus.tetris.gameplay.PieceView;
+
 public class GameActivity extends AppCompatActivity implements Board.OnLineClearListener {
     BoardView boardView;
     TextView scoreView;
@@ -15,12 +21,15 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        Setting setting = SettingDAO.getInstance().getSetting(getApplicationContext());
+
         boardView = this.findViewById(R.id.boardView);
         PieceView nextPieceView = this.findViewById(R.id.nextPieceView);
         PieceView holdView = this.findViewById(R.id.holdPieceView);
         holdView.setOnClickListener((View) -> holdView.setPiece(boardView.hold()));
         boardView.setOnNextPieceListener(nextPieceView::setPiece);
         boardView.setOnLineClearListener(this);
+        boardView.setLineClearScore((int)setting.getLineScore());
 
         scoreView = this.findViewById(R.id.scoreTextView);
         scoreView.setText("0");

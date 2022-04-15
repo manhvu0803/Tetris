@@ -1,4 +1,4 @@
-package hcmus.tetris;
+package hcmus.tetris.gameplay;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,6 +17,9 @@ import androidx.core.content.ContextCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import hcmus.tetris.Coord;
+import hcmus.tetris.R;
 
 /**
  * TODO: document your custom view class.
@@ -186,5 +189,9 @@ public class BoardView extends View implements View.OnTouchListener {
 
     public void setOnLineClearListener(Board.OnLineClearListener listener) {
         board.lineClearListener = listener;
+    }
+
+    public void setLineClearScore(int score) {
+        board.setLineClearScore(score);
     }
 }

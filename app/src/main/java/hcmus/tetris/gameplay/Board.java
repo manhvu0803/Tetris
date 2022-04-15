@@ -1,8 +1,7 @@
-package hcmus.tetris;
+package hcmus.tetris.gameplay;
 
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
@@ -12,6 +11,8 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import hcmus.tetris.Coord;
 
 public class Board {
     interface OnNextPieceListener {
@@ -27,6 +28,7 @@ public class Board {
 
     int rows, columns;
     int maxSpeed, minSpeed;
+    int lineClearScore = 800;
     int dropSpeed;
     int[][] pile;
 
@@ -154,7 +156,7 @@ public class Board {
             if (cnt >= columns) {
                 ++diff;
                 if (lineClearListener != null)
-                    lineClearListener.onLineClear(i, 800);
+                    lineClearListener.onLineClear(i, lineClearScore);
             }
             if (i - diff >= 0)
                 pile[i] = pile[i - diff];
@@ -205,5 +207,9 @@ public class Board {
 
     public int[][] getPile() {
         return pile;
+    }
+
+    public void setLineClearScore(int score) {
+        lineClearScore = score;
     }
 }
