@@ -27,22 +27,22 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import hcmus.tetris.dto.HighScore;
+import hcmus.tetris.dto.SaveGame;
 import hcmus.tetris.ults.DAOHelper;
 
-public class HighScoreDAO {
-    public static HighScoreDAO instance;
-    private XmlPullParser parserHighScore;
+public class SaveGamesDAO {
+    public static SaveGamesDAO instance;
+    private XmlPullParser parserSaveGame;
 
-    public static HighScoreDAO getInstance(){
+    public static SaveGamesDAO getInstance(){
         if (instance == null){
-            instance = new HighScoreDAO();
+            instance = new SaveGamesDAO();
         }
         return instance;
     }
 
-    public ArrayList<HighScore> getHighScores(Context context){
-        ArrayList<HighScore> highScores = null;
+    public ArrayList<SaveGame> getSaveGames(Context context){
+        ArrayList<SaveGame> saveGames = null;
         BufferedReader bufferedReader;
         try {
             String fileName = context.getFilesDir() + "/" + "database.xml";
@@ -55,31 +55,31 @@ public class HighScoreDAO {
         if (bufferedReader != null){
             //prepare parser to parse database.xml
             try {
-                parserHighScore = Xml.newPullParser();
-                parserHighScore.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                parserHighScore.setInput(bufferedReader);
-                parserHighScore.nextTag();
+                parserSaveGame = Xml.newPullParser();
+                parserSaveGame.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+                parserSaveGame.setInput(bufferedReader);
+                parserSaveGame.nextTag();
             } catch (XmlPullParserException | IOException e) {
                 e.printStackTrace();
-                parserHighScore = null;
+                parserSaveGame = null;
             }
 
-            if (parserHighScore != null) {
+            if (parserSaveGame != null) {
                 //parsing process
                 try {
                     //read Database tag (root tag) in database
-                    parserHighScore.require(XmlPullParser.START_TAG, null, "Database");
+                    parserSaveGame.require(XmlPullParser.START_TAG, null, "Database");
 
                     //start reading
-                    while (parserHighScore.next() != XmlPullParser.END_TAG) {
-                        if (parserHighScore.getEventType() == XmlPullParser.START_TAG) {
+                    while (parserSaveGame.next() != XmlPullParser.END_TAG) {
+                        if (parserSaveGame.getEventType() == XmlPullParser.START_TAG) {
                             //start by looking for Setting tag
-                            if (parserHighScore.getName().equals("HighScore")) {
+                            if (parserSaveGame.getName().equals("SaveGames")) {
                                 //read Setting tag
-                                highScores = readHighScoreTag();
+                                saveGames = readSaveGamesTag();
                             } else {
                                 //skip other tag
-                                DAOHelper.skipParser(parserHighScore);
+                                DAOHelper.skipParser(parserSaveGame);
                             }
                         }
                     }
@@ -94,37 +94,39 @@ public class HighScoreDAO {
             }
         }
 
-        return highScores;
+        return saveGames;
     }
 
-    private ArrayList<HighScore> readHighScoreTag(){
-        ArrayList<HighScore> highScores = new ArrayList<>();
+    private ArrayList<SaveGame> readSaveGamesTag(){
+        ArrayList<SaveGame> saveGames = new ArrayList<>();
         try {
             //variables to store Setting's data
-            long value;
-            String timeStamp, player;
+            String timeStamp, otherContent;
+            long score;
 
             //start reading Setting tag
-            parserHighScore.require(XmlPullParser.START_TAG, null, "HighScore");
-            while (parserHighScore.next() != XmlPullParser.END_TAG) {
-                if (parserHighScore.getEventType() == XmlPullParser.START_TAG) {
-                    parserHighScore.require(XmlPullParser.START_TAG, null, "Score");
-                    value = Long.parseLong(parserHighScore.getAttributeValue(null, "value"));
-                    timeStamp = parserHighScore.getAttributeValue(null, "timestamp");
-                    player = parserHighScore.getAttributeValue(null, "player");
-                    parserHighScore.next();
-                    parserHighScore.require(XmlPullParser.END_TAG, null, "Score");
-                    highScores.add(new HighScore(player, timeStamp, value));
+            parserSaveGame.require(XmlPullParser.START_TAG, null, "SaveGames");
+            while (parserSaveGame.next() != XmlPullParser.END_TAG) {
+                if (parserSaveGame.getEventType() == XmlPullParser.START_TAG) {
+                    parserSaveGame.require(XmlPullParser.START_TAG, null, "Game");
+                    timeStamp = parserSaveGame.getAttributeValue(null, "timestamp");
+                    score = Long.parseLong(parserSaveGame.getAttributeValue(null, "score"));
+                    otherContent = "";
+                    while (parserSaveGame.next() == XmlPullParser.TEXT){
+                        otherContent += parserSaveGame.getText().toString();
+                    }
+                    parserSaveGame.require(XmlPullParser.END_TAG, null, "Game");
+                    saveGames.add(new SaveGame(timeStamp, score, otherContent));
                 }
             }
         } catch (XmlPullParserException | IOException e) {
             e.printStackTrace();
         }
 
-        return highScores;
+        return saveGames;
     }
 
-    public int saveHighScoreToDTB(Context context, HighScore newHighScore){
+    public int saveSaveGameToDTB(Context context, SaveGame newSaveGame){
         int saveResult = 1;
         DocumentBuilderFactory docBuildFac = DocumentBuilderFactory.newInstance();
         FileInputStream fileInputStream = null;
@@ -136,15 +138,15 @@ public class HighScoreDAO {
                 //get DOM from database.xml and then get <HighScore> tag
                 DocumentBuilder builder = docBuildFac.newDocumentBuilder();
                 Document doc = builder.parse(fileInputStream);
-                Node highScoreNode = doc.getElementsByTagName("HighScore").item(0);
+                Node saveGamesNode = doc.getElementsByTagName("SaveGames").item(0);
 
                 //add new <Score> to <HighScore>
-                highScoreNode.appendChild(doc.createTextNode("\n"));
-                Element newHighScoreNode = doc.createElement("Score");
-                newHighScoreNode.setAttribute("value", Long.toString(newHighScore.getScore()));
-                newHighScoreNode.setAttribute("timestamp", newHighScore.getDateTime());
-                newHighScoreNode.setAttribute("player", newHighScore.getName());
-                highScoreNode.appendChild(newHighScoreNode);
+                saveGamesNode.appendChild(doc.createTextNode("\n"));
+                Element newSaveGameNode = doc.createElement("Game");
+                newSaveGameNode.setAttribute("timestamp", newSaveGame.getDateTime());
+                newSaveGameNode.setAttribute("score", newSaveGame.getScore().toString());
+                newSaveGameNode.appendChild(doc.createTextNode(newSaveGame.getOtherContent()));
+                saveGamesNode.appendChild(newSaveGameNode);
 
                 //save DOM to database.xml
                 TransformerFactory transformerFactory = TransformerFactory.newInstance();

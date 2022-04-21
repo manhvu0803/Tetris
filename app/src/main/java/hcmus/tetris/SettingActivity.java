@@ -28,7 +28,7 @@ public class SettingActivity extends AppCompatActivity {
     Button btnSave, btnCancel;
 
     //other variables
-    SettingDAO settingDAO;
+    final SettingDAO settingDAO = SettingDAO.getInstance();
     final ArrayList<EditText> timeLevelEditTextList = new ArrayList<>();
     Setting setting;
 
@@ -38,7 +38,6 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //get current setting in database
-        settingDAO = SettingDAO.getInstance();
         setting = settingDAO.getSetting(getApplicationContext());
 
         setContentView(R.layout.activity_setting);

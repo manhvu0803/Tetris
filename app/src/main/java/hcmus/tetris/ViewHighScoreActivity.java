@@ -18,7 +18,7 @@ public class ViewHighScoreActivity extends AppCompatActivity {
     RecyclerView highScoreRecyclerView;
 
     //other variables
-    HighScoreDAO highScoreDAO;
+    final HighScoreDAO highScoreDAO = HighScoreDAO.getInstance();
     CustomHighScoreAdapter adapter;
     ArrayList<HighScore> highScores;
 
@@ -27,7 +27,6 @@ public class ViewHighScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //get current high score list in database
-        highScoreDAO = HighScoreDAO.getInstance();
         highScores = highScoreDAO.getHighScores(getApplicationContext());
 
         //reverse highScores list

@@ -27,11 +27,7 @@
     </HighScore>
 
     <SaveGames>
-        <Game timestamp="2021-12-20 01:30:00" score="10020">
-
-        </Game>
-        <Game timestamp="2021-12-20 01:30:00" score="10020">
-
-        </Game>
+        <Game timestamp="2021-12-20 01:30:00" score="10020">asdasdasdasasdasdasdasdasdasdasdasdadasdasdasdasdasdasdasdasd</Game>
+        <Game timestamp="2021-12-20 01:30:00" score="10020">asdasdasdasasdasdasdasdasdasdasdasdadasdasdasdasdasdasdasdasd</Game>
     </SaveGames>
 </Database>
