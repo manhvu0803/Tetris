@@ -164,7 +164,7 @@ public class SettingActivity extends AppCompatActivity {
         int winScoreInt, rowScoreInt;
 
         if (winScore.isEmpty()) message = "Vui lòng điền điểm biên";
-        else if (!((winScoreInt = Integer.parseInt(winScore)) > 100)) message = "Điểm biên phải lớn hơn 100";
+        else if ((winScoreInt = Integer.parseInt(winScore)) < 100) message = "Điểm biên tối thiểu là 100";
         else if (rowScore.isEmpty()) message = "Vui lòng điền điểm thưởng khi xóa 1 dòng";
         else if (!((rowScoreInt = Integer.parseInt(rowScore)) > 0)
                 || (rowScoreInt > (winScoreInt/100))) {
