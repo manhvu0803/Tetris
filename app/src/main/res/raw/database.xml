@@ -2,7 +2,7 @@
 <Database>
     <Setting>
         <ScoreLimit value="100000"/>
-        <LineScore value="1100"/>
+        <LineScore value="1000"/>
         <TimeLevel>
             <Level1 level="0" timestamp="0" dropspeed="100"/>
             <Level2 level="1" timestamp="100" dropspeed="200"/>

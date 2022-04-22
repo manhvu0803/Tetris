@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="128dp"
         android:fontFamily="serif"
-        android:text="Your score is"
+        android:text="Điểm của bạn là"
         android:textColor="@color/black"
-        android:textSize="52sp"
+        android:textSize="45sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,37 +41,40 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
         android:ems="5"
-        android:hint="Your name"
+        android:hint="Tên của bạn"
         android:textAlignment="center"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/reachedScoreTextView" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveScoreButton"
         android:layout_width="0dp"
-        android:layout_height="86dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Save"
+        android:paddingVertical="25dp"
+        android:text="Lưu"
         android:textSize="24sp"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_green_round_button"
         app:layout_constraintEnd_toStartOf="@+id/cancelSaveScoreButton"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancelSaveScoreButton"
-        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
-        android:layout_height="86dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:paddingVertical="25dp"
         android:text="Cancel"
-        android:textColor="@color/black"
         android:textSize="24sp"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_red_round_button"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toEndOf="@+id/saveScoreButton"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
-        app:strokeWidth="2dp" />
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

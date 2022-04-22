@@ -4,8 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Dev/Android/Tetris/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_Yellow_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_green_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_orange_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_purple_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_red_round_button.xml" value="0.171" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_ripple_background.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_ripple_background_red.xml" value="0.171" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_yellow_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/test_color.xml" value="0.171" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_game.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_load_game_play.xml" value="0.17753623188405798" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_main.xml" value="0.1539855072463768" />

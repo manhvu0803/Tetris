@@ -32,7 +32,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPlayNew"
@@ -44,8 +44,7 @@
         android:textSize="20sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/light_blue_400"
+        android:background="@drawable/custom_purple_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle"/>
@@ -60,8 +59,7 @@
         android:textSize="20sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/light_blue_400"
+        android:background="@drawable/custom_green_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
@@ -77,8 +75,7 @@
         android:textSize="20sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/light_blue_400"
+        android:background="@drawable/custom_yellow_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
@@ -94,8 +91,7 @@
         android:textSize="20sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/light_blue_400"
+        android:background="@drawable/custom_orange_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@+id/btnSetting"/>
@@ -110,8 +106,7 @@
         android:textSize="20sp"
         android:textStyle="italic"
         android:textColor="@color/black"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/light_blue_400"
+        android:background="@drawable/custom_red_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@+id/btnViewScore"/>

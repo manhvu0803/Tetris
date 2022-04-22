@@ -142,8 +142,77 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void setOnClickListener(){
-        btnSave.setOnClickListener(view -> saveSetting());
+        btnSave.setOnClickListener(view -> {
+            String message = validateSetting();
+            if (message.isEmpty()) {
+                saveSetting();
+            }
+            else {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
         btnCancel.setOnClickListener(view -> onBackPressed());
+    }
+
+    private String validateSetting() {
+        String message = "";
+        String winScore = editWinScore.getText().toString();
+        String rowScore = editRowScore.getText().toString();
+        String boardWidth = editBoardWidth.getText().toString();
+        String boardHeight = editBoardHeight.getText().toString();
+
+        int winScoreInt, rowScoreInt;
+
+        if (winScore.isEmpty()) message = "Vui lòng điền điểm biên";
+        else if (!((winScoreInt = Integer.parseInt(winScore)) > 100)) message = "Điểm biên phải lớn hơn 100";
+        else if (rowScore.isEmpty()) message = "Vui lòng điền điểm thưởng khi xóa 1 dòng";
+        else if (!((rowScoreInt = Integer.parseInt(rowScore)) > 0)
+                || (rowScoreInt > (winScoreInt/100))) {
+            message = "Điểm thưởng khi xóa dòng phải lớn hơn 0 và không quá 1% điểm biên";
+        }
+        else {
+            String currentSpeedDrop, currentTimeLevel;
+
+            int preSpeedDropInt = 0, currentSpeedDropInt;
+
+            int levelNum = timeLevelEditTextList.size();
+            for (int i = 0; i < levelNum; i++){
+                currentTimeLevel = timeLevelEditTextList.get(i).getText().toString();
+                currentSpeedDrop = timeLevelEditTextList.get(++i).getText().toString();
+                System.out.println(currentTimeLevel);
+                System.out.println(currentSpeedDrop);
+                if (currentTimeLevel.isEmpty() || currentSpeedDrop.isEmpty()) {
+                    message = "Vui lòng điền đầy đủ tốc độ rơi và thời gian chuyển cho mức độ khó " + ((i + 1)/2);
+                }
+                else if (Integer.parseInt(currentTimeLevel) < 60) {
+                    message = "Thời gian chuyển không được nhỏ hơn 60";
+                }
+                else if ((currentSpeedDropInt = Integer.parseInt(currentSpeedDrop)) < 100) {
+                    message = "Tốc độ rơi không được nhỏ hơn 100";
+                }
+                else {
+                    if (preSpeedDropInt > 0) {
+                        if (currentSpeedDropInt < preSpeedDropInt) {
+                            message = "Tốc độ rơi của độ khó " + ((i + 1) / 2) + " không được nhỏ hơn độ khó trước đó";
+                        }
+                    }
+                    preSpeedDropInt = currentSpeedDropInt;
+                }
+
+                if (!message.isEmpty()) break;
+            }
+
+            if (message.isEmpty()) {
+                if (boardWidth.isEmpty() || boardHeight.isEmpty()) {
+                    message = "Vui lòng điền đầy đủ chiều rộng và chiều cao của bàn cờ";
+                }
+                else if (!(Integer.parseInt(boardWidth) > 0) || !(Integer.parseInt(boardHeight) > 0)) {
+                    message = "Chiều rộng và chiều cao của bàn cờ phải lớn hơn 0";
+                }
+            }
+        }
+
+        return message;
     }
 
     private void saveSetting(){
