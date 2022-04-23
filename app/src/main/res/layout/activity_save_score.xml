@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textAlignment="center"
+    android:background="@drawable/main_background"
     tools:context=".SaveScoreActivity">
 
     <TextView
@@ -14,7 +15,7 @@
         android:layout_marginTop="128dp"
         android:fontFamily="serif"
         android:text="Điểm của bạn là"
-        android:textColor="@color/black"
+        android:textColor="@color/button_orange_center"
         android:textSize="45sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +29,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="serif"
         android:text="80000!"
-        android:textColor="@color/black"
+        android:textColor="@color/button_orange_center"
         android:textSize="60sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
@@ -44,6 +45,9 @@
         android:hint="Tên của bạn"
         android:textAlignment="center"
         android:textSize="34sp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray_400"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/reachedScoreTextView" />
@@ -54,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:paddingVertical="25dp"
+        android:paddingVertical="20dp"
         android:text="Lưu"
         android:textSize="24sp"
         android:textColor="@color/white"
@@ -69,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:paddingVertical="25dp"
+        android:paddingVertical="20dp"
         android:text="Cancel"
         android:textSize="24sp"
         android:textColor="@color/white"

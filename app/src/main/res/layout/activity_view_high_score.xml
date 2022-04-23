@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".ViewHighScoreActivity">
     <!--    Guideline helpers-->
     <androidx.constraintlayout.widget.Guideline
@@ -56,7 +57,7 @@
         android:layout_marginStart="5dp"
         android:gravity="center"
         android:text="@string/time"
-        android:textColor="@color/black"
+        android:textColor="@color/yellow_block"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline"
@@ -70,7 +71,7 @@
         android:text="@string/name"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/yellow_block"
         android:gravity="center"
         app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline2"
         app:layout_constraintStart_toEndOf="@+id/txtTimeTitle"
@@ -83,22 +84,36 @@
         android:text="@string/score"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/yellow_block"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtNameTitle"
         app:layout_constraintTop_toTopOf="@+id/txtNameTitle"/>
 
+    <View
+        android:id="@+id/topDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/yellow_block"
+        app:layout_constraintTop_toBottomOf="@id/txtNameTitle"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/highScoreRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textColor="@color/black"
-        android:layout_marginStart="5dp"
         android:orientation="vertical"
+        android:background="@color/black_50"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txtNameTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/topDivider"/>
+
+    <View
+        android:id="@+id/bottomDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/yellow_block"
+        app:layout_constraintTop_toBottomOf="@id/highScoreRecyclerView"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBackToMain"
@@ -108,8 +123,8 @@
         android:text="@string/back"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/gray_200"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_blue_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_guideline"/>

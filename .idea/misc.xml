@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Dev/Android/Tetris/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_Yellow_round_button.xml" value="0.171" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_blue_round_button.xml" value="0.171" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_green_round_button.xml" value="0.171" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_orange_round_button.xml" value="0.171" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/drawable/custom_purple_round_button.xml" value="0.171" />
@@ -20,10 +21,11 @@
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_play_option.xml" value="0.1539855072463768" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_save_score.xml" value="0.17753623188405798" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_setting.xml" value="0.17753623188405798" />
-        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_view_high_score.xml" value="0.1539855072463768" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/activity_view_high_score.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/custom_high_score_row.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/custom_save_game_row.xml" value="0.2" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/sample_board_view.xml" value="0.1" />
+        <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/layout/sample_next_piece_view.xml" value="0.17753623188405798" />
         <entry key="..\:/Users/ACER/AndroidStudioProjects/Tetris/app/src/main/res/xml/database.xml" value="0.17753623188405798" />
       </map>
     </option>

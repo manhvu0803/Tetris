@@ -3,6 +3,7 @@ package hcmus.tetris;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((HighScoreViewHolder) holder).setData(highScores.get(position));
+        ((HighScoreViewHolder) holder).setData(highScores.get(position), position, highScores.size());
     }
 
     @Override
@@ -47,11 +48,15 @@ public class CustomHighScoreAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             binding = customHighScoreRowBinding;
         }
         @SuppressLint("SetTextI18n")
-        public void setData(HighScore highScore)
+        public void setData(HighScore highScore, int position, int rowNum)
         {
             binding.txtTime.setText(highScore.getDateTime());
             binding.txtName.setText(highScore.getName());
             binding.txtHighScore.setText(Long.toString(highScore.getScore()));
+            if (position == rowNum - 1) {
+                binding.viewDivider.setVisibility(View.INVISIBLE);
+            }
+            else binding.viewDivider.setVisibility(View.VISIBLE);
         }
     }
 }

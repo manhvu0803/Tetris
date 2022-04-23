@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".LoadGamePlayActivity">
     <!--    Guideline helpers-->
     <androidx.constraintlayout.widget.Guideline
@@ -55,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/time"
-        android:textColor="@color/black"
+        android:textColor="@color/button_purple_end"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/mid_vertical_guideline"
@@ -69,10 +70,18 @@
         android:text="Điểm hiện tại"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/button_purple_end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/mid_vertical_guideline2"
         app:layout_constraintTop_toTopOf="@+id/txtTimeTitle" />
+
+    <View
+        android:id="@+id/topDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/button_purple_end"
+        app:layout_constraintTop_toBottomOf="@id/txtTimeTitle"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/saveGameRecyclerView"
@@ -80,9 +89,17 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_marginStart="5dp"
+        android:background="@color/black_50"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/txtTimeTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/topDivider"/>
+
+    <View
+        android:id="@+id/bottomDivider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/button_purple_end"
+        app:layout_constraintTop_toBottomOf="@id/saveGameRecyclerView"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBackToMain"
@@ -92,8 +109,8 @@
         android:text="@string/back"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="@drawable/custom_round_button"
-        android:backgroundTint="@color/gray_200"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_orange_round_button"
         app:layout_constraintEnd_toStartOf="@+id/end_vertical_guideline"
         app:layout_constraintStart_toStartOf="@+id/start_vertical_guideline"
         app:layout_constraintTop_toTopOf="@+id/horizontal_guideline"/>
