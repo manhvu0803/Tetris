@@ -3,6 +3,7 @@ package hcmus.tetris.gameplay;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Handler;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -178,17 +179,15 @@ public class Board {
         Piece p = getCurrentPiece();
         p.rotate(dir);
         // Check if the rotation is valid
+        int dx = 0, dy = 0;
         for (Coord cr : p.getBlockPositions()) {
-            int dx = 0, dy = 0;
-            if (cr.x >= rows)
-                dx = cr.x - rows + 1;
-            if (cr.y >= columns)
-                dy = cr.y - columns + 1;
-            p.move(dx, dy);
-            if (pile[cr.x][cr.y] != 0) {
-                p.rotate(-dir);
-                break;
-            }
+            dx = Math.max(dx, cr.x - rows + 1);
+            dy = Math.max(dy, cr.y - columns + 1);
+        }
+        Log.d("Rotate move", dx + "," + dy);
+        p.move(-dx, -dy);
+        for (Coord cr : p.getBlockPositions()) {
+            Log.d("After rotate", cr.x + "," + cr.y);
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -20,6 +21,8 @@ import java.util.TimerTask;
 
 import hcmus.tetris.Coord;
 import hcmus.tetris.R;
+import hcmus.tetris.dao.SettingDAO;
+import hcmus.tetris.dto.Setting;
 
 /**
  * TODO: document your custom view class.
@@ -40,20 +43,20 @@ public class BoardView extends View implements View.OnTouchListener {
 
     public BoardView(Context context) {
         super(context);
-        init(null, 0);
+        init(context, null, 0);
     }
 
     public BoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init(context, attrs, 0);
     }
 
     public BoardView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        init(context, attrs, defStyle);
     }
 
-    private void init(AttributeSet attrs, int defStyle) {
+    private void init(Context context, AttributeSet attrs, int defStyle) {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BoardView, defStyle, 0);
 
@@ -62,6 +65,15 @@ public class BoardView extends View implements View.OnTouchListener {
         backgroundColor = a.getColor(R.styleable.BoardView_backgroundColor, Color.BLACK);
         int maxSpeed = a.getInt(R.styleable.BoardView_maxSpeed, 1200);
         int minSpeed = a.getInt(R.styleable.BoardView_minSpeed, 100);
+
+        try {
+            Setting settings = SettingDAO.getInstance().getSetting(context);
+            columns = settings.getWidth();
+            rows = settings.getHeight();
+        }
+        catch (Exception e) {
+            Log.e("BoardView", "Failed to get board size from setting");
+        }
 
         board = new Board(rows, columns, minSpeed, maxSpeed);
         board.startGame();
