@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".GameActivity">
 
     <TextView
@@ -13,10 +14,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:background="#F1EEEE"
+        android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="1500"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:background="@color/gray_400"
+            android:background="@color/gray_600"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/boardView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -63,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Next"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/nextPieceView"
             app:layout_constraintStart_toStartOf="@+id/nextPieceView"
@@ -74,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
-            android:background="@color/gray_400"
+            android:background="@color/gray_600"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/boardView"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -85,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Hold"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/nextPieceView"
             app:layout_constraintStart_toStartOf="@+id/nextPieceView"
