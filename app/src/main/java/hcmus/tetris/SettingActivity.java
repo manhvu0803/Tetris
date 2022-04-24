@@ -184,8 +184,8 @@ public class SettingActivity extends AppCompatActivity {
                 if (currentTimeLevel.isEmpty() || currentSpeedDrop.isEmpty()) {
                     message = "Vui lòng điền đầy đủ tốc độ rơi và thời gian chuyển cho mức độ khó " + ((i + 1)/2);
                 }
-                else if (Integer.parseInt(currentTimeLevel) < 60) {
-                    message = "Thời gian chuyển không được nhỏ hơn 60";
+                else if (!(Integer.parseInt(currentTimeLevel) > 0)) {
+                    message = "Thời gian chuyển phải lớn hơn 0";
                 }
                 else if ((currentSpeedDropInt = Integer.parseInt(currentSpeedDrop)) < 100) {
                     message = "Tốc độ rơi không được nhỏ hơn 100";
