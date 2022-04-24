@@ -53,7 +53,7 @@ public class SaveScoreActivity extends AppCompatActivity implements View.OnClick
         switch (view.getId()) {
             case (R.id.saveScoreButton): {
                 String name = nameEditText.getText().toString();
-                String message = "";
+                String message;
                 if (name.isEmpty()) {
                     message = "Vui lòng điền tên";
                 }
@@ -74,5 +74,25 @@ public class SaveScoreActivity extends AppCompatActivity implements View.OnClick
                 break;
             }
         }
+
+        TextView scoreView = this.findViewById(R.id.reachedScoreTextView);
+        scoreView.setText(score + "!");
+
+        EditText nameEditText = this.findViewById(R.id.nameEditText);
+
+        Button saveButton = this.findViewById(R.id.saveScoreButton);
+        saveButton.setOnClickListener((viewi) -> {
+            HighScore highscore = new HighScore(nameEditText.getText().toString(), DAOHelper.formatDateTime(LocalDateTime.now()), score);
+            HighScoreDAO.getInstance().saveHighScoreToDTB(SaveScoreActivity.this, highscore);
+            returnToMain();
+        });
+
+        Button cancelButton = this.findViewById(R.id.cancelSaveScoreButton);
+        cancelButton.setOnClickListener((viewi) -> returnToMain());
+    }
+
+    private void returnToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
