@@ -16,6 +16,8 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,19 +65,13 @@ public class BoardView extends View implements View.OnTouchListener {
         rows = a.getInt(R.styleable.BoardView_rows, 20);
         columns = a.getInt(R.styleable.BoardView_columns, 10);
         backgroundColor = a.getColor(R.styleable.BoardView_backgroundColor, Color.BLACK);
-        int maxSpeed = a.getInt(R.styleable.BoardView_maxSpeed, 1200);
-        int minSpeed = a.getInt(R.styleable.BoardView_minSpeed, 100);
 
-        try {
-            Setting settings = SettingDAO.getInstance().getSetting(context);
-            columns = settings.getWidth();
-            rows = settings.getHeight();
-        }
-        catch (Exception e) {
-            Log.e("BoardView", "Failed to get board size from setting");
-        }
+        Setting settings = SettingDAO.getInstance().getSetting(context);
+        columns = settings.getWidth();
+        rows = settings.getHeight();
+        List<ArrayList<Integer>> levels = settings.getTimeLevels();
 
-        board = new Board(rows, columns, minSpeed, maxSpeed);
+        board = new Board(rows, columns, levels);
         board.startGame();
 
         timer = new Timer();
@@ -123,10 +119,9 @@ public class BoardView extends View implements View.OnTouchListener {
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         super.onMeasure(widthSpec, heightSpec);
-        int width = getMeasuredWidth();
-        unit = (float)width / columns;
-        float newHeight = (float)rows / columns * width;
-        setMeasuredDimension(width, (int)newHeight);
+        int width = getMeasuredWidth(), height = getMeasuredHeight();
+        unit = Math.min((float)width / columns, (float)height / rows);
+        setMeasuredDimension((int)(unit * columns), (int)(unit * rows));
     }
 
     public void drawUnit(Canvas canvas, float x, float y, float pad, Paint paint) {

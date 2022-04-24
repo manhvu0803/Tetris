@@ -4,14 +4,15 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import hcmus.tetris.Coord;
 
@@ -29,12 +30,13 @@ public class Board {
     }
 
     static PieceType[] pieceTypes = PieceType.values();
-    static Random rng = new Random();
+
+    Random rng = new Random();
+
+    BoardTimer timer;
 
     int rows, columns;
-    int maxSpeed, minSpeed;
     int lineClearScore = 800;
-    int dropSpeed;
     int[][] pile;
 
     Handler handler = new Handler(Looper.getMainLooper()) {
@@ -44,7 +46,6 @@ public class Board {
         }
     };
 
-    Timer timer = new Timer();
     public Runnable tickListener = null;
     public OnNextPieceListener nextPieceListener;
     public OnLineClearListener lineClearListener;
@@ -59,43 +60,36 @@ public class Board {
     }
 
     public Board(int rows, int columns) {
-        this(rows, columns, 100, 1200);
+        this(rows, columns, null);
     }
 
-    public Board(int rows, int columns, int minSpeed, int maxSpeed) {
+    public Board(int rows, int columns, List<ArrayList<Integer>> levels) {
         if (columns < 4)
             throw new IllegalArgumentException("Board needs at least 4 columns");
 
-
         this.rows = rows;
         this.columns = columns;
+
+        LinkedList<Pair<Integer, Integer>> levelsQueue = new LinkedList<>();
+        for (ArrayList<Integer> level : levels)
+            levelsQueue.add(new Pair<>(level.get(0), level.get(1)));
+
+        timer = new BoardTimer(handler, levelsQueue);
+
         pile = new int[rows][columns];
         generateNewPiece();
         generateNewPiece();
         currentPiece = queue.poll();
         if (nextPieceListener != null && queue.peek() != null)
             nextPieceListener.onNewNextPiece(queue.peek().getType());
-
-        this.maxSpeed = maxSpeed;
-        this.minSpeed = minSpeed;
-        dropSpeed = maxSpeed;
-    }
-
-    void changeSpeed(int speed) {
-        dropSpeed = Math.min(maxSpeed, Math.max(maxSpeed - speed, minSpeed));
     }
 
     public void startGame() {
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                handler.sendMessage(handler.obtainMessage());
-            }
-        }, 0, dropSpeed);
+        timer.start();
     }
 
     public void pause() {
-        timer.cancel();
+        timer.pause();
     }
 
     void generateNewPiece() {
@@ -151,8 +145,12 @@ public class Board {
     }
 
     void addToPile(Piece piece) {
-        if (piece.getCoord().x == 0)
+        Log.d("AddToPile", piece.getCoord().toString());
+        if (piece.getCoord().x <= 0) {
             gameOverListener.onGameOver();
+            timer.pause();
+            return;
+        }
 
         for (Coord coord : piece.getBlockPositions())
             pile[coord.x][coord.y] = piece.color;
