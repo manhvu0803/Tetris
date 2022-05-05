@@ -2,6 +2,7 @@ package hcmus.tetris;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,19 @@ public class CustomSaveGameAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((CustomSaveGameAdapter.SaveGameViewHolder) holder).setData(saveGames.get(position));
+        SaveGame saveGame = saveGames.get(position);
+        ((CustomSaveGameAdapter.SaveGameViewHolder) holder).setData(saveGame);
 
-        ((SaveGameViewHolder) holder).setItemCLickListener((view, position1) -> Toast.makeText(context, "You choose row " + (position1 + 1), Toast.LENGTH_SHORT).show());
+        ((SaveGameViewHolder) holder).setItemCLickListener((view, position1) -> {
+            String dateTime = saveGame.getDateTime(), otherContent = saveGame.getOtherContent();
+            long score = saveGame.getScore();
+            Intent playGameIntent = new Intent(context, GameActivity.class);
+            playGameIntent.putExtra("newGame", false);
+            playGameIntent.putExtra("dateTime", dateTime);
+            playGameIntent.putExtra("otherContent", otherContent);
+            playGameIntent.putExtra("score", score);
+            context.startActivity(playGameIntent);
+        });
     }
 
     @Override

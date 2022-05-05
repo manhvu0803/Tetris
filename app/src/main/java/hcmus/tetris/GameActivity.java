@@ -52,7 +52,7 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
     @Override
     public void onLineClear(int row, int addScore) {
         score += addScore;
-        scoreView.setText(score + "");
+        scoreView.setText(score);
     }
 
     @Override
@@ -60,5 +60,6 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
         Intent intent = new Intent(this, SaveScoreActivity.class);
         intent.putExtra("score", score);
         startActivity(intent);
+        finish();
     }
 }
