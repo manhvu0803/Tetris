@@ -1,20 +1,16 @@
 package hcmus.tetris;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.time.LocalDateTime;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-import hcmus.tetris.dao.HighScoreDAO;
 import hcmus.tetris.dao.SaveGamesDAO;
-import hcmus.tetris.dto.HighScore;
 import hcmus.tetris.dto.SaveGame;
-import hcmus.tetris.ults.DAOHelper;
 
 public class LoadGamePlayActivity extends AppCompatActivity {
     //widget variables

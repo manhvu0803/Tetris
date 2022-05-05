@@ -64,11 +64,12 @@ public class CustomSaveGameAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             binding = customSaveGameBinding;
             binding.getRoot().setOnClickListener(this);
         }
-        @SuppressLint("SetTextI18n")
+
         public void setData(SaveGame saveGame)
         {
             binding.txtTime.setText(saveGame.getDateTime());
-            binding.txtHighScore.setText(Long.toString(saveGame.getScore()));
+            String saveGameScore = Long.toString(saveGame.getScore());
+            binding.txtHighScore.setText(saveGameScore);
         }
 
         public void setItemCLickListener(ItemCLickListener itemCLickListener){
