@@ -52,7 +52,8 @@ public class GameActivity extends AppCompatActivity implements Board.OnLineClear
     @Override
     public void onLineClear(int row, int addScore) {
         score += addScore;
-        scoreView.setText(score);
+        String scoreString = score + "";
+        scoreView.setText(scoreString);
     }
 
     @Override
