@@ -81,4 +81,47 @@ public class DAOHelper {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return dateTime.format(dateTimeFormatter);
     }
+
+    static public String twoDArrayIntToString(int[][] twoDArrayInt) {
+        StringBuilder stringBuilder = new StringBuilder();
+        if (twoDArrayInt != null) {
+            int rowNum = twoDArrayInt.length;
+            if (rowNum > 0) {
+                int colNum = twoDArrayInt[0].length;
+                for (int row = 0; row < rowNum; row++) {
+                    for (int col = 0; col < colNum; col++) {
+                        stringBuilder.append(twoDArrayInt[row][col]);
+                        if (col < (colNum - 1)) {
+                            stringBuilder.append("-");
+                        }
+                    }
+                    if (row < (rowNum - 1)) {
+                        stringBuilder.append("_");
+                    }
+                }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    static public int[][] stringTo2DArray(String string) {
+        if (string != null) {
+            String[] rows = string.split("_");
+            int rowNum = rows.length;
+            if (rowNum > 0) {
+                int[][] twoDArrayInt = new int[rowNum][];
+                for (int row = 0; row < rowNum; row++) {
+                    String[] cols = rows[row].split("-");
+                    int colNum = cols.length;
+                    int[] arrayInt = new int[colNum];
+                    for (int col = 0; col < colNum; col++) {
+                        arrayInt[col] = Integer.parseInt(cols[col]);
+                    }
+                    twoDArrayInt[row] = arrayInt;
+                }
+                return twoDArrayInt;
+            }
+        }
+        return null;
+    }
 }

@@ -111,10 +111,11 @@ public class SaveGamesDAO {
                     parserSaveGame.require(XmlPullParser.START_TAG, null, "Game");
                     timeStamp = parserSaveGame.getAttributeValue(null, "timestamp");
                     score = Long.parseLong(parserSaveGame.getAttributeValue(null, "score"));
-                    otherContent = "";
+                    StringBuilder otherContentBuilder = new StringBuilder();
                     while (parserSaveGame.next() == XmlPullParser.TEXT){
-                        otherContent += parserSaveGame.getText().toString();
+                        otherContentBuilder.append(parserSaveGame.getText());
                     }
+                    otherContent = otherContentBuilder.toString();
                     parserSaveGame.require(XmlPullParser.END_TAG, null, "Game");
                     saveGames.add(new SaveGame(timeStamp, score, otherContent));
                 }

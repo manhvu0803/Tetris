@@ -28,7 +28,6 @@ public class CustomSaveGameAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("OK");
         return new CustomSaveGameAdapter.SaveGameViewHolder(
                 CustomSaveGameRowBinding.inflate(LayoutInflater.from(parent.getContext()), parent,
                         false));
@@ -38,12 +37,7 @@ public class CustomSaveGameAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((CustomSaveGameAdapter.SaveGameViewHolder) holder).setData(saveGames.get(position));
 
-        ((SaveGameViewHolder) holder).setItemCLickListener(new ItemCLickListener() {
-            @Override
-            public void onCLick(View view, int position) {
-                Toast.makeText(context, "You choose row " + (position + 1), Toast.LENGTH_SHORT).show();
-            }
-        });
+        ((SaveGameViewHolder) holder).setItemCLickListener((view, position1) -> Toast.makeText(context, "You choose row " + (position1 + 1), Toast.LENGTH_SHORT).show());
     }
 
     @Override
